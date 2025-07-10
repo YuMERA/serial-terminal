@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Serial Terminal</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="menu.css">
+    <link rel="icon" href="favicon.ico">
+</head>
+<body>
+    <div class="container">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div class="menu-container">
+                <div id="menuToggle" class="menu-toggle" title="Open menu">&#9776;</div>
+                <div id="dropdownMenu" class="dropdown-menu">
+                    <a href="https://mera-system.com" target="_blank"><span class="icon">🏠</span>Home</a>
+                    <a href="#" id="infoLink"><span class="icon">ℹ️</span>Info</a>
+                    <a href="#" id="featuresLink"><span class="icon">⚙️</span>Features</a>
+                    <a href="#" id="aboutLink"><span class="icon">📘</span>About</a>
+                    <a href="#" id="helpLink"><span class="icon">❓</span>Help</a>
+                    <a href="#" id="contactLink"><span class="icon">✉️</span>Contact Us</a>
+                </div>
+                
+            </div>
+            <h1 style="flex-grow: 1; text-align: center; margin: 15px;">Web Serial Terminal</h1>
+        </div>
+
+        <div class="top-controls">
+            <button id="connectDisconnectButton" class="connect" title="Click to select and connect to a serial port.">Connect</button>
+
+            <div class="baud-rate-select">
+                <label for="baudRate">Baud Rate:</label>
+                <select id="baudRate">
+                    <option value="9600">9600</option>
+                    <option value="19200">19200</option>
+                    <option value="38400">38400</option>
+                    <option value="57600">57600</option>
+                    <option value="115200" selected>115200</option>
+                    <option value="230400">230400</option>
+                    <option value="460800">460800</option>
+                    <option value="921600">921600</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="data-io-section">
+            <div class="data-io-header">
+                <h2>Terminal Output & Input</h2>
+
+                <!-- Horizontalna grupa ikona -->
+                <div class="top-icons">
+                    <div class="icon-wrapper" id="themeToggle" title="Toggle Theme">
+                        <div class="icon">🌙</div>
+                        <div class="icon-label">Dark theme</div>
+                    </div>
+                    <div class="icon-wrapper" id="atCommandsIcon" title="Predefined AT commands">
+                        <div class="icon">📜</div>
+                        <div class="icon-label">At-cmd</div>
+                    </div>
+                    <div class="icon-wrapper" id="settingsIcon" title="Open Settings">
+                        <div class="icon">⚙️</div>
+                        <div class="icon-label">Settings</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="send-input-wrapper">
+                <!-- IZMENJENI DEO -->
+                <div class="send-input-row">
+                    <div class="input-with-clear">
+                        <input type="text" id="sendInput" placeholder="Enter command to send...">
+                        <span id="clearInputButton" title="Clear input">&times;</span>
+                    </div>
+                    <button id="sendButton">Send</button>
+                </div>
+
+                <div class="line-ending-select">
+                    <select id="lineEnding">
+                        <option value="none">No Line Ending</option>
+                        <option value="lf" selected>New Line (LF)</option>
+                        <option value="cr">Carriage Return (CR)</option>
+                        <option value="crlf">Both NL & CR (CRLF)</option>
+                    </select>
+                    <label for="displayFormat" style="color: #888; margin-left: 20px; margin-right: 5px; margin-bottom: 10px;">Display Format:</label>
+                    <select id="displayFormat">
+                        <option value="normal">Normal</option>
+                        <option value="hex">Hex</option>
+                        <option value="json">JSON</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="terminal-output-wrapper">
+                <div id="statusGroup">
+                    <span id="autoClearStatus"></span>
+                    <span id="lineCountStatus">Lines: <span id="lineCount">0</span></span>
+                    <span id="bufferStatus">Buffer: <span id="bufferSize">2000</span></span>
+                </div>
+                <textarea id="receivedDataOutput" readonly></textarea>
+            </div>
+
+            <div class="display-options-bottom">
+                <div class="output-action-buttons">
+                    <button id="clearOutputButton" class="bottom-clear-button">Clear</button>
+                    <button id="saveOutputButton" class="bottom-save-button">Save</button>
+                    <button id="copyOutputButton" class="bottom-copy-button">Copy</button>
+                </div>
+
+                <div class="options-group">
+                    <div class="checkbox-group">
+                        <label for="showTimestamp">
+                            <input type="checkbox" id="showTimestamp"> Show Timestamp
+                        </label>
+                        <label for="autoScroll">
+                            <input type="checkbox" id="autoScroll" checked> Autoscroll
+                        </label>
+                        <label for="pauseOutput">
+                            <input type="checkbox" id="pauseOutput"> Pause Output
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <span>&copy; 2025 by me[R]a</span>
+        </div>
+    </div>
+
+    <!-- MODAL ZA PODEŠAVANJA -->
+    <div id="settingsModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span id="closeModal" class="close-button">&times;</span>
+            <h3>Settings</h3>
+            <div id="settings-content">
+                <label for="modalMaxLines">Max Buffer Lines:</label>
+                <input type="number" id="modalMaxLines" min="100" step="100" value="2000" style="width: 100px;">
+            </div>
+
+            <div id="settings-content">
+                <label for="modalDefaultBaudRate">Default Baud Rate:</label>
+                <select id="modalDefaultBaudRate">
+                    <option value="9600">9600</option>
+                    <option value="19200">19200</option>
+                    <option value="38400">38400</option>
+                    <option value="57600">57600</option>
+                    <option value="115200" selected>115200</option>
+                    <option value="230400">230400</option>
+                    <option value="460800">460800</option>
+                    <option value="921600">921600</option>
+                </select>
+            </div>
+            <!-- LINE ENDING OPCIJA -->
+            <div id="settings-content">
+                <label for="modalLineEnding">Default Line Ending:</label>
+                <select id="modalLineEnding">
+                    <option value="none">No Line Ending</option>
+                    <option value="lf" selected>New Line (LF)</option>
+                    <option value="cr">Carriage Return (CR)</option>
+                    <option value="crlf">Both NL & CR (CRLF)</option>
+                </select>
+            </div>
+
+            <!-- TIMESTAMP FORMAT -->
+            <div id="settings-content">
+                <label>
+                    <input type="checkbox" id="modalDefaultTimestamp">
+                    Show Timestamp by Default
+                </label>
+                <label>
+                    <input type="checkbox" id="modalUse12h">
+                    Use 12-hour Timestamp Format
+                </label>
+            </div>
+
+            <!--Auto Clear Output-->
+            <div id="settings-content">
+                <label for="modalAutoClear">Auto-Clear Output:</label>
+                <select id="modalAutoClear">
+                    <option value="0">Off</option>
+                    <option value="1">Every 1 min</option>
+                    <option value="5">Every 5 min</option>
+                    <option value="10">Every 10 min</option>
+                </select>
+            </div>
+            
+            
+            <button id="saveSettings">Save Settings</button>
+            <button id="resetSettingsButton" style="margin-left: 10px;">Reset to Defaults</button>
+
+        </div>
+    </div>
+    <!-- MODAL za AT komande -->
+    <div id="atCommandsModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close-button" id="closeAtModal">&times;</span>
+            <h3>AT Commands</h3>
+            <ul id="atCommandList" style="list-style-type: none; padding-left: 0;"></ul>
+        </div>
+    </div>
+
+    <!-- MODAL: ABOUT -->
+    <div id="aboutModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close-button" id="closeAboutModal">&times;</span>
+            <h3>About This Terminal</h3>
+            <p>This is a web-based serial terminal designed for developers and embedded systems enthusiasts.</p>
+            <ul>
+                <li>🟢 Send and receive serial commands in real-time</li><br>
+                <li>📝 Supports line endings, timestamping, buffer size settings</li><br>
+                <li>⚙️ Predefined AT commands selection</li><br>
+                <li>📤 Export or copy terminal output</li><br>
+                <li>💬 Useful for debugging ESP, Arduino, and other microcontrollers</li><br>
+            </ul>
+            <p style="font-size: 0.9em; color: #777;">Developed by me[R]a | Version 1.0</p>
+        </div>
+    </div>
+
+    <!-- MODAL: CONTACT US -->
+    <div id="contactModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close-button" id="closeContactModal">&times;</span>
+            <h3>Contact Us</h3>
+            <p>If you have suggestions, feedback, or encounter any issues using this terminal, feel free to get in touch.</p>
+            <p>You can reach us at:</p>
+            <p style="font-size: 1.2em;">
+                📧 <a href="mailto:yumera@gmail.com" style="color: #007bff; text-decoration: none;">yumera@gmail.com</a>
+            </p>
+            
+            <p style="font-size: 0.9em; color: #777;">We aim to respond to all inquiries as soon as possible.</p>
+        </div>
+    </div> 
+
+    <!-- MODAL ZA HELP -->
+    <div id="helpModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span id="closeHelpModal" class="close-button">&times;</span>
+            <h3>Help</h3>
+            <p>
+                To get started with the Web Serial Terminal:
+            </p>
+            <ul>
+                <li>Connect your device to your computer using a USB cable.</li>
+                <li>Click the <strong>Connect</strong> button.</li>
+                <li>From the list of available serial ports, select the one corresponding to your device.</li>
+                <li>Once connected, you can send and receive data using the terminal interface below.</li>
+                <li>Use the predefined AT command list for quick access to commonly used commands.</li>
+                <li>Customize your terminal experience via the <strong>Settings</strong> icon.</li>
+            </ul>
+            <p>
+                This application is designed to make serial communication simple, fast, and accessible directly from your browser.
+            </p>
+        </div>
+    </div>
+
+    <!-- MODAL ZA INFO -->
+    <div id="infoModal" class="modal" style="display:none;">
+        <div class="modal-content wide">
+            <span id="closeInfoModal" class="close-button">&times;</span>
+            <h3>Information</h3>
+            <div id="infoContainer" class="info-container"></div>
+        </div>
+    </div>
+
+    <!-- MODAL: FEATURES / HOW IT WORKS -->
+    <div id="featuresModal" class="modal" style="display:none;">
+        <div class="modal-content wide">
+            <span id="closeFeaturesModal" class="close-button">&times;</span>
+            <h3>Application Features & Notes</h3>
+            <ul style="line-height: 1.6em;">
+                <li><strong>Auto Scroll:</strong> Works only while the buffer is not full (under Max Lines). After that, scroll is always forced.</li>
+                <li><strong>Copy / Save:</strong> Only the most recent <strong>Max Lines</strong> will be copied or saved. Older data is removed from memory.</li>
+                <li><strong>Pause Output:</strong> Pauses live data display. Incoming data is ignored during pause.</li>
+                <li><strong>Timestamp:</strong> Adds real-time timestamp (12h or 24h) to each line if enabled.</li>
+                <li><strong>Display Format:</strong> Switch between Normal / Hex / JSON views for incoming data.</li>
+                <li><strong>Auto-Clear:</strong> When active and connected, clears the terminal after selected time interval.</li>
+                <li><strong>Dark/Light Theme:</strong> Switch between themes using the 🌙/☀️ icon. Preference is remembered.</li>
+                <li><strong>Buffer Limit:</strong> Configurable in Settings. Determines how many recent lines are stored (min 100).</li>
+                <li><strong>Predefined AT Commands:</strong> Quick insert from a popup list of ready-to-use AT commands.</li>
+                <li><strong>Settings Persistence:</strong> All options (baud rate, timestamps, themes, etc.) are saved locally.</li>
+            </ul>
+            <p style="font-size: 0.9em; color: #777;">These behaviors ensure performance, usability, and stability during continuous serial communication.</p>
+            <p style="font-size: 0.85em; color: #555;">
+                Coming soon: CSV export, filtering, line bookmarks, and more.
+            </p>
+            
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

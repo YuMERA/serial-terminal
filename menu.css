@@ -1,0 +1,64 @@
+/* === Hamburger meni stilovi === */
+.menu-toggle {
+    font-size: 28px;
+    cursor: pointer;
+    user-select: none;
+    padding-right: 15px;
+    display: flex;
+    align-items: center;
+    color: var(--text-color);
+}
+
+.menu-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: var(--container-bg);
+    border: 1px solid var(--mod-border-color);
+    top: 40px;
+    left: 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    min-width: 160px;
+    z-index: 1000;
+}
+
+.dropdown-menu a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: var(--text-color);
+    background-color: var(--container-bg);
+    font-weight: bold;
+    font-size: 0.95em;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.dropdown-menu a:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.dropdown-menu .icon {
+    font-size: 1.1em;
+}
+
+
+/* Responsive – na mobilnim neka bude više razmaka oko menija */
+@media (max-width: 650px) {
+    .menu-toggle {
+        font-size: 24px;
+        padding-right: 10px;
+    }
+
+    .dropdown-menu {
+        top: 35px;
+        min-width: 140px;
+    }
+}

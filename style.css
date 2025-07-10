@@ -1,0 +1,939 @@
+:root {
+    --bg-color: #f4f4f4;
+    --text-color: #333;
+    --container-bg: #fff;
+    --border-color: #ddd;
+    --input-bg: white;
+    --input-text: #333;
+    --badge-autoclear-bg: #fcebea;
+    --badge-autoclear-text: #dc3545;
+    --badge-autoclear-border: #f5c6cb;
+    --badge-lines-bg: #e7f1ff;
+    --badge-lines-text: #007bff;
+    --badge-lines-border: #b8daff;
+    --badge-buffer-bg: #e6f4ea;
+    --badge-buffer-text: #28a745;
+    --badge-buffer-border: #c3e6cb;
+    --set-conntent-bg: #f1f1f1;
+    --mod-border-color:#ccc;
+    --at-command-item: #f1f1f1;
+    --info-entry-bg: #f9f9f9;
+    --info-entry-description: #444;
+}
+
+.theme-dark {
+    --bg-color: #565656;
+    --text-color: #ccc;
+    --container-bg: #2c2c2c;
+    --border-color: #444;
+    --input-bg: #444;
+    --input-text: #f0f0f0;
+    --badge-autoclear-bg: #3b1e1e;
+    --badge-autoclear-text: #ff6b6b;
+    --badge-autoclear-border: #883c3c;
+    --badge-lines-bg: #1d2d3a;
+    --badge-lines-text: #4aa3ff;
+    --badge-lines-border: #356ca5;
+    --badge-buffer-bg: #1f3324;
+    --badge-buffer-text: #4de36f;
+    --badge-buffer-border: #327a42;
+    --set-conntent-bg: #2c2c2c;
+    --mod-border-color:#888;
+    --at-command-item: #444;
+    --info-entry-bg: #000;
+    --info-entry-description: #888;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Poravnanje sa vrhom */
+    min-height: 100vh;
+    background-color: var(--bg-color);
+    margin: 20px;
+    box-sizing: border-box; /* Dodato za bolje responsive ponašanje */
+}
+
+.container {
+    background-color: var(--container-bg);
+    padding: 10px 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 750px; /* Povećana maksimalna širina radi Line Endinga */
+    box-sizing: border-box;
+    margin: 0 auto; /* Centriraj kontejner */
+}
+
+h1 {
+    color: var(--text-color);
+    text-align: center;
+    /*margin-bottom: 25px;*/
+    font-size: 2em;
+}
+
+h2 {
+    color: var(--text-color);
+    text-align: left;
+    font-size: 1.2em;
+}
+
+/* Stil za gornju grupu kontrola (Connect/Disconnect dugme i Baud Rate) */
+.top-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    /*background-color: #f9f9f9;*/
+    background-color: var(--set-conntent-bg);
+    flex-wrap: wrap; /* Dodato za responsive */
+    gap: 15px; /* Dodato za razmak */
+}
+
+/* Stil za Connect/Disconnect dugme */
+#connectDisconnectButton {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    white-space: nowrap; /* Sprečava prelamanje teksta */
+}
+
+#connectDisconnectButton.connect {
+    background-color: var(--badge-autoclear-text); /* Crvena za Connect */
+    color: var(--input-bg); 
+}
+
+#connectDisconnectButton.connect:hover:not([disabled]) {
+    background-color: #c82333;
+    transform: translateY(-1px);
+}
+
+#connectDisconnectButton.disconnect {
+    background-color: var(--badge-buffer-text); /* Zelena za Disconnect */
+    color: var(--input-bg);
+}
+
+#connectDisconnectButton.disconnect:hover:not([disabled]) {
+    background-color: #218838;
+    transform: translateY(-1px);
+}
+
+#connectDisconnectButton:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Stil za Baud rate select box */
+.baud-rate-select {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Dodato za razmak */
+}
+
+.baud-rate-select label {
+    margin-right: 0; /* Uklonjeno jer se koristi gap */
+    font-weight: bold;
+    white-space: nowrap;
+    color: #555;
+}
+
+select {
+    padding: 8px 10px;
+    border: 1px solid var(--mod-border-color);
+    border-radius: 4px;
+    background-color: var(--input-bg);
+    font-size: 1em;
+    color: var(--text-color);
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22M287%2C114.7L159.2%2C242.4c-4.4%2C4.4-10.2%2C6.6-16%2C6.6s-11.6-2.2-16-6.6L5.4%2C114.7c-4.4-4.4-6.6-10.2-6.6-16s2.2-11.6%2C6.6-16l16-16c4.4-4.4%2C10.2-6.6%2C16-6.6s11.6%2C2.2%2C16%2C6.6l121.2%2C121.2l121.2-121.2c4.4-4.4%2C10.2-6.6%2C16-6.6s11.6%2C2.2%2C16%2C6.6l16%2C16c4.4%2C4.4%2C6.6%2C10.2%2C6.6%2C16S291.4%2C110.3%2C287%2C114.7z%22%2F%3E%3C%2Fsvg%3E'); /* Dodata strelica */
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
+    padding-right: 30px; /* Prostor za strelicu */
+    margin-bottom: 10px;
+}
+select:focus {
+    outline: none;
+    border-color: var(--badge-lines-text);
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+/* Sekcija za Terminal Output & Input */
+.data-io-section {
+    margin-bottom: 10px;
+    padding: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    /*background-color: #f9f9f9;*/
+    background-color: var(--set-conntent-bg);
+}
+
+/* data-io-header sada flex kontejner za H2 i Max Lines */
+.data-io-header {
+    display: flex;
+    justify-content: space-between; /* Razmak između H2 i Max Lines */
+    align-items: center; /* Vertikalno poravnanje */
+    margin-bottom: 10px;
+    flex-wrap: wrap; /* Omogućava prelamanje na manjim ekranima */
+    gap: 10px; /* Razmak između elemenata kada se prelome */
+}
+
+/* Wrapper za send input grupu (input+button i line ending) */
+.send-input-wrapper {
+    display: flex;
+    flex-direction: column; /* Elementi će se slagati vertikalno */
+    gap: 10px; /* Razmak između redova */
+    margin-bottom: 5px;
+}
+
+/* Red za input i dugme */
+.send-input-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap; /* Da se input i dugme prelamaju na manjim ekranima */
+    align-items: center; /* Vertikalno poravnanje inputa i dugmeta */
+}
+
+#sendInput {
+    flex-grow: 1;
+    padding: 10px 12px;
+    border: 1px solid var(--mod-border-color);
+    border-radius: 4px;
+    font-size: 1em;
+    color: var(--text-color);
+    background-color: var(--input-bg);
+    min-width: 150px;
+    flex-shrink: 1;
+    padding-right: 30px; /* Prostor za X dugme */
+}
+#sendInput::placeholder {
+    color: #999;
+}
+#sendInput:focus {
+    outline: none;
+    border-color: var(--badge-lines-text);
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+#sendButton {
+    background-color: #17a2b8;
+    color: var(--input-bg);
+    font-weight: bold;
+    padding: 10px 18px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+#sendButton:hover:not([disabled]) {
+    background-color: #138496;
+    transform: translateY(-1px);
+}
+
+/* Stil za Line Ending Select box (sada je u posebnom redu i poravnat levo) */
+.line-ending-select {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    flex-shrink: 0;
+    justify-content: flex-start; /* Poravnaj elemente unutar ovog div-a na levo */
+}
+
+/* Wrapper za prikaz terminala i broja linija */
+.terminal-output-wrapper {
+    position: relative; /* Bitno za pozicioniranje broja linija */
+    /*margin-top: 15px; /* Dodaje razmak iznad celog terminalskog izlaza */
+}
+
+/* Stil za TEXTAREA element (#receivedDataOutput) */
+#receivedDataOutput {
+    width: 100%;
+    box-sizing: border-box;
+    padding-left: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.9em;
+    background-color: var(--input-bg);
+    height: 365px; /* FIKSNA VISINA */
+    overflow-y: auto; /* SKROLBAR */
+    overflow-x: auto; 
+    white-space: pre; /* pre-wrap omogućava prelom teksta */
+    word-break: break-word; /* omogućava prelamanje dugih reči */
+    overflow-wrap: normal;
+    word-break: normal;
+    color: var(--text-color); /* Podrazumevana boja teksta */
+    line-height: 1.4; /* Za bolju čitljivost linija */
+    resize: none; /* Onemogući korisnicima promenu veličine textarea */
+    outline: none;
+}
+
+/* Stil za prikaz broja linija */
+.line-count-display {
+    position: absolute;
+    top: -22px; /* Pomera ga iznad gornje ivice terminal-output-wrapper-a */
+    right: 0px; /* Poravnato desno */
+    font-size: 0.8em; /* Mali font */
+    color: #666; /* Diskretna boja */
+    background-color: transparent; /* Providna pozadina */
+    padding: 0 5px; /* Mali padding */
+    z-index: 1; /* Osigurava da je iznad drugih elemenata ako se preklapaju */
+    pointer-events: none; /* Omogućava da se klikovi prolaze kroz element */
+    white-space: nowrap; /* Sprečava prelamanje teksta */
+}
+
+#statusGroup {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* ➜ Prikaz desno */
+    gap: 10px;
+    font-size: 0.9em;
+    color: #666;
+    padding: 4px 8px;
+    flex-wrap: wrap;
+}
+
+#statusGroup span {
+    padding: 2px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 0.9em;
+    white-space: nowrap;
+    border: 1px solid var(--border-color);
+    /* border: 1px solid transparent;*/
+}
+
+/* 🟥 AutoClear badge */
+#autoClearStatus {
+    background-color: var(--badge-autoclear-bg);
+    color: var(--badge-autoclear-text);
+    border-color: var(--badge-autoclear-border);
+}
+
+/* 🟦 Lines badge */
+#lineCountStatus {
+    background-color: var(--badge-lines-bg);
+    color: var(--badge-lines-text);
+    border-color: var(--badge-lines-border);
+}
+
+/* 🟩 Buffer badge */
+#bufferStatus {
+    background-color: var(--badge-buffer-bg);
+    color: var(--badge-buffer-text);
+    border-color: var(--badge-buffer-border);
+}
+
+/*.autoclear-label {
+    font-weight: bold;
+    color: var(--badge-autoclear-text);
+    background-color: var(--badge-autoclear-bg);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.85em;
+}
+
+/* Donja grupa opcija (Checkbox-ovi i Clear dugme) */
+.display-options-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px; /* Povećan gap za bolji razmak */
+    margin-top: 15px;
+    flex-wrap: wrap; /* Dodato za responsive */
+}
+
+/* Grupa za Clear, Save, Copy dugmad */
+.output-action-buttons {
+    display: flex;
+    gap: 10px; /* Razmak između dugmadi */
+    flex-wrap: wrap;
+}
+
+/* Stilovi za Save i Copy dugmad */
+.bottom-save-button {
+    background-color: var(--badge-lines-text); /* Plava boja za Save */
+    color: var(--input-bg);
+    padding: 8px 15px;
+    font-size: 0.9em;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.bottom-save-button:hover {
+    background-color: #0056b3;
+}
+
+.bottom-copy-button {
+    background-color: #6c757d; /* Siva boja za Copy */
+    color: var(--input-bg);
+    padding: 8px 15px;
+    font-size: 0.9em;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.bottom-copy-button:hover {
+    background-color: #5a6268;
+}
+
+/* Postojeći stil za Clear dugme u donjem delu */
+.bottom-clear-button {
+    background-color: #ffc107; /* Žuta boja */
+    /*color: var(--text-color);*/
+    padding: 8px 15px;
+    font-size: 0.9em;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.bottom-clear-button:hover {
+    background-color: #e0a800;
+}
+
+/* Grupa koja sadrži samo checkboxove (Max Lines je premešten) */
+.options-group {
+    display: flex;
+    align-items: center; /* Vertikalno poravnanje */
+    justify-content: flex-end; /* Poravnaj desno (ako ima mesta) */
+    width: auto; /* Prilagodi širinu sadržaju */
+    gap: 15px; /* Razmak između checkbox grupe */
+}
+
+/* Grupa za checkboxove */
+.checkbox-group {
+    display: flex;
+    gap: 20px;
+}
+
+.display-options-bottom label {
+    display: flex;
+    align-items: center;
+    font-weight: normal;
+    font-size: 0.9em;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.display-options-bottom input[type="checkbox"] {
+    margin-right: 8px;
+    transform: scale(1.1);
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #ccc;
+    border-radius: 3px;
+    outline: none;
+    position: relative;
+    top: 1px;
+    transition: all 0.2s ease;
+    background-color: var(--input-bg);
+}
+
+.display-options-bottom input[type="checkbox"]:checked {
+    background-color: var(--badge-lines-text);
+    border-color: var(--badge-lines-text);
+}
+
+.display-options-bottom input[type="checkbox"]:checked::after {
+    content: '✔';
+    color: var(--input-bg);
+    font-size: 14px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    line-height: 1;
+}
+
+.display-options-bottom input[type="checkbox"]:focus {
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+/* Stilovi za Max Lines input */
+.max-lines-input {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.max-lines-input label {
+    font-weight: bold;
+    white-space: nowrap;
+    color: #555;
+}
+
+.max-lines-input input[type="number"] {
+    padding: 8px 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 1em;
+    color: var(--text-color);
+    background-color: var(--input-bg);
+    width: 80px; /* Fiksna širina */
+    text-align: center;
+    /*-moz-appearance: textfield; /* Sakriva strelice za brojeve u Firefoxu */
+}
+.max-lines-input input[type="number"]::-webkit-outer-spin-button,
+.max-lines-input input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.max-lines-input input[type="number"]:focus {
+    outline: none;
+    border-color: var(--badge-lines-text);
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+
+/* Stil za copyright informaciju (CENTRIANO) */
+.copyright {
+    /*margin-top: 25px;*/
+    text-align: center; /* CENTRIRANO */
+    font-size: 0.8em;
+    color: #777;
+}
+
+/* ======================================= */
+/* RESPONSIVE DIZAJN (za mobilne uređaje) */
+/* ======================================= */
+
+/* Media Query za ekrane širine do 650px (manji ekrani, telefoni) */
+@media (max-width: 650px) {
+    .container {
+        padding: 10px 20px;
+        margin: 10px;
+    }
+
+    h1 {
+        font-size: 1.6em;
+    }
+    h2 {
+        font-size: 1em;
+    }
+
+    .top-controls {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+        padding: 10px;
+    }
+
+    #connectDisconnectButton {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .baud-rate-select {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    .baud-rate-select select {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .data-io-section {
+        padding: 10px;
+    }
+
+    /* Za mobilne, max-lines-input se vraća u novi red ispod h2 */
+    .data-io-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px; /* Razmak između h2 i max-lines */
+    }
+    .data-io-header h2 {
+        width: 100%; /* Da zauzme celu širinu iznad max-lines */
+    }
+    .max-lines-input {
+        width: 100%; /* Max lines zauzima celu širinu */
+        justify-content: flex-start; /* Poravnaj levo */
+    }
+    .max-lines-input input[type="number"] {
+        flex-grow: 1; /* Omogući da zauzme dostupan prostor */
+    }
+
+    .send-input-wrapper {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .send-input-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .input-with-clear {
+        position: relative;
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+    }
+
+    #sendInput {
+        width: 100%;
+        padding-right: 30px; /* prostor za X dugme */
+    }
+
+    #clearInputButton {
+        position: absolute;
+        right: 8px;
+        font-size: 16px;
+        color: #888;
+        cursor: pointer;
+        display: none;
+        user-select: none;
+    }
+    
+    #clearInputButton:hover {
+        color: #000;
+    }
+
+    #sendButton {
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .line-ending-select {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .line-ending-select select {
+        flex-grow: 1;
+    }
+
+    #receivedDataOutput {
+        height: 150px; /* Fiksna visina na 150px na ovim ekranima */
+    }
+
+    .display-options-bottom {
+        flex-direction: column;
+        align-items: flex-start; /* Poravnanje na levu stranu */
+        gap: 15px;
+    }
+
+    .output-action-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+    .output-action-buttons button {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* checkbox-group se i dalje prikazuje kao kolona na mobilnom */
+    .checkbox-group {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+    }
+}
+
+/* Media Query za ekrane širine do 400px (vrlo mali telefoni) */
+@media (max-width: 400px) {
+    h1 {
+        font-size: 1.4em;
+    }
+    h2 {
+        font-size: .9em;
+    }
+    .top-controls {
+        padding: 8px;
+    }
+    #connectDisconnectButton {
+        padding: 8px 15px;
+        font-size: 1em;
+    }
+    .data-io-section {
+        padding: 8px;
+    }
+    #sendInput {
+        padding: 8px 10px;
+        font-size: 0.9em;
+    }
+    #sendButton {
+        padding: 8px 12px;
+        font-size: 0.9em;
+    }
+    #receivedDataOutput {
+        font-size: 0.85em;
+        height: 120px;
+    }
+    .bottom-clear-button,
+    .bottom-save-button,
+    .bottom-copy-button {
+        padding: 6px 12px;
+        font-size: 0.8em;
+    }
+    .display-options-bottom label {
+        font-size: 0.9em;
+    }
+    /* Max Lines input na malim ekranima */
+    .max-lines-input label {
+        font-size: 0.9em;
+    }
+    .max-lines-input input[type="number"] {
+        padding: 6px 8px;
+        font-size: 0.9em;
+    }
+}
+
+/* Settings icon */
+.settings-icon {
+    font-size: 24px;
+    cursor: pointer;
+    color: #555;
+}
+.settings-icon:hover {
+    color: #000;
+}
+
+#settingsModal button {
+    margin-top: 10px;
+    width: 140px;
+}
+
+/* Modal styling */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: var(--container-bg);
+    border: 1px solid var(--mod-border-color);
+    margin: 3% auto;
+    padding: 20px;
+    line-height: 1.6em;
+    border-radius: 6px;
+    width: 320px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+.modal-content.wide {
+    width: 600px;
+    max-height: 85vh;
+    overflow-y: auto;
+    line-height: 1.2em;
+}
+
+.modal-content.wide li {
+    line-height: 1.6em;
+    color: var(--info-entry-description);
+}
+
+.modal-content h3 {
+    margin-top: 0;
+    color: var(--text-color);
+}
+
+.modal-content #settings-content{   
+    background-color: var(--set-conntent-bg);
+    border: 1px solid var(--border-color);
+    padding: 12px 16px;
+    margin-bottom: 12px;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.modal-content label {
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 8px;  /* Razmak između checkboxa i teksta */
+    margin: 10px 0;
+}
+
+.modal-content input {
+    color: var(--text-color);
+    background-color: var(--input-bg);
+    /*width: 100%;*/
+    padding: 8px;
+    font-size: 1em;
+    margin-bottom: 10px;
+    border: 1px solid var(--mod-border-color);
+    border-radius: 4px;
+}
+
+.modal-content input[type="checkbox"] {
+    margin-right: 10px;
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+.modal-content button {
+    padding: 10px 15px;
+    font-weight: bold;
+    background-color: var(--badge-lines-text);
+    border: none;
+    color: var(--input-bg);
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.modal-content button:hover {
+    background-color: #0056b3;
+}
+.modal-content li {
+    line-height: 1.5em;
+    color: var(--text-color);
+    /*color: var(--info-entry-description);*/
+}
+.modal-content p{
+    color: var(--info-entry-description);
+}
+
+#modalLineEnding {
+    width: 100%;
+    padding: 8px;
+    font-size: 1em;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.close-button {
+    color: var(--text-color);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+.close-button:hover {
+    color: red;
+}
+
+/* ✅ Ikone iznad terminal sekcije */
+.top-icons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.icon-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1em;
+    transition: transform 0.2s ease;
+}
+
+.icon-wrapper:hover {
+    transform: scale(1.1);
+}
+
+.icon-label {
+    color: var(--text-color);
+    font-size: 0.75em;
+    font-weight: bold;
+    margin-top: 6px;
+}
+
+.icon {
+    font-size: 18px;
+}
+
+/* ✅ Modal - već imaš neke od ovih, ovde dopuna ako fali */
+.at-command-item {
+    padding: 6px 10px;
+    margin: 4px 0;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-family: monospace;
+    color: var(--text-color);
+    background-color: var(--at-command-item);
+}
+
+.at-command-item:hover {
+    background-color: var(--badge-lines-text);
+    color: white;
+}
+
+.input-with-clear {
+    position: relative;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+}
+
+#clearInputButton {
+    position: absolute;
+    right: 10px;
+    font-size: 24px;
+    color: #888;
+    cursor: pointer;
+    display: none;
+    user-select: none;
+}
+
+#clearInputButton:hover {
+    color: #000;
+}
+
+/* Stil za pojedinačni info box */
+.info-entry {
+    border-left: 4px solid var(--badge-lines-text);
+    background-color: var(--info-entry-bg);
+    padding: 12px 16px;
+    margin-bottom: 12px;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.info-entry .title {
+    font-weight: bold;
+    font-size: 1.1em;
+    color: var(--text-color);
+}
+
+.info-entry .timestamp {
+    font-size: 0.8em;
+    color: #888;
+    margin-bottom: 6px;
+}
+
+.info-entry .description {
+    font-size: 0.95em;
+    color: var(--info-entry-description);
+}
+
+/* Zasenčeni checkbox label kada je autoscroll nedostupan */
+.checkbox-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

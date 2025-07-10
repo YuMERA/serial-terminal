@@ -1,0 +1,53 @@
+[
+    {
+      "title": "Auto Scroll Status Tooltip",
+      "timestamp": "2025-07-05 18:20",
+      "description": "Auto Scroll checkbox now provides tooltip explanations depending on its enabled or disabled state."
+    },    
+    {
+      "title": "Copy/Save Limitation Tooltip",
+      "timestamp": "2025-07-05 18:00",
+      "description": "Tooltips on Copy and Save buttons now inform users that only the currently visible buffer will be exported, based on the Max Lines setting."
+    },
+    {
+      "title": "Dark/Light Theme Switcher",
+      "timestamp": "2025-07-05 16:10",
+      "description": "You can now switch between light and dark themes using the 🌙/☀️ icon above the terminal section. The current theme is saved across sessions."
+    },
+    {
+      "title": "Auto-Clear Feature Added",
+      "timestamp": "2025-07-05 14:35",
+      "description": "The app can now automatically clear terminal output after a specified time interval while connected. This option is configurable via Settings."
+    },
+    {
+      "title": "Display Format Selector Added",
+      "timestamp": "2025-07-04 21:15",
+      "description": "Users can now switch between Normal, Hex, and JSON display formats directly in the main interface."
+    },
+    {
+      "title": "Settings Persistence for Timestamp Format and Line Ending",
+      "timestamp": "2025-07-04 20:40",
+      "description": "The application now remembers your preferred timestamp format (12h/24h) and line ending settings using localStorage."
+    },
+    {
+      "title": "Settings Reset to Default",
+      "timestamp": "2025-07-04 19:50",
+      "description": "A reset button has been added to the settings modal to restore default values for all options."
+    },
+    {
+      "title": "Settings Stored with Local Persistence",
+      "timestamp": "2025-07-04 19:05",
+      "description": "Changes made in the Settings modal, such as Baud Rate, Max Lines, and Show Timestamp, are now saved and restored after browser refresh."
+    },
+    {
+      "title": "New Feature: Input Clear Button",
+      "timestamp": "2025-07-04 16:12",
+      "description": "We have added an 'X' button next to the input field to allow users to quickly clear the entered command."
+    },
+    {
+      "title": "UI Enhancements in Terminal Section",
+      "timestamp": "2025-07-03 10:45",
+      "description": "The terminal input and output sections have been restyled for better usability and readability."
+    }
+  ]
+  

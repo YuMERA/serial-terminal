@@ -1,0 +1,47 @@
+[
+    {
+      "cmd": "AT",
+      "description": "Test if the module is responding."
+    },
+    {
+      "cmd": "AT+GMR",
+      "description": "Check Version Information."
+    },
+    {
+      "cmd": "AT+RST",
+      "description": "Restart the module."
+    },
+    {
+      "cmd": "AT+CMD",
+      "description": "All supported AT commands."
+    },
+    {
+      "cmd": "AT+CWMODE=1",
+      "description": "Set WiFi mode to Station."
+    },
+    {
+      "cmd": "AT+CWJAP=\"SSID\",\"password\"",
+      "description": "Connect to WiFi network."
+    },
+    {
+      "cmd": "AT+GSLP=<time>",
+      "description": "Enter Deep-sleep mode."
+    },
+    {
+      "cmd": "ATE0",
+      "description": "Switch echo off."
+    },
+    {
+      "cmd": "ATE1",
+      "description": "Switch echo on."
+    },
+    {
+      "cmd": "AT+RESTORE",
+      "description": "Restore factory default settings of the module."
+    },
+    {
+      "cmd": "AT+SLEEP?",
+      "description": "Set the sleep mode."
+    }
+  ]
+  
