@@ -874,4 +874,6 @@ document.addEventListener('DOMContentLoaded', () => {
     scrollLocked = !autoScrollCheckbox.checked;
     lineCountSpan.textContent = totalLinesReceived;
     bufferSizeDisplay.textContent = maxLinesToDisplay;
+    
+    updateOutputDisplay();
 });
