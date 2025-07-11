@@ -61,17 +61,6 @@ document.addEventListener('DOMContentLoaded', () => {
         autoScrollLabel.title = AUTO_SCROLL_ENABLED_TOOLTIP;
     }
 
-    function escapeHtml(str) {
-        return str.replace(/[&<>"']/g, function (m) {
-            switch (m) {
-                case '&': return '&amp;';
-                case '<': return '&lt;';
-                case '>': return '&gt;';
-                case '"': return '&quot;';
-                case "'": return '&#039;';
-            }
-        });
-    }
 
     function updateAutoScrollAvailability() {
         const atLimit = displayedLines.length >= maxLinesToDisplay;
@@ -237,7 +226,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateOutputDisplay() {
         let previousScrollTop = receivedDataOutput.scrollTop; // zapamti poziciju
-        receivedDataOutput.innerHTML = displayedLines.join('<br>');
+        receivedDataOutput.value = displayedLines.join('\n');
     
         // Učitaj iz localStorage vrednost za autoClear
         const storedSettings = JSON.parse(localStorage.getItem('serialSettings')) || {};
@@ -277,26 +266,17 @@ document.addEventListener('DOMContentLoaded', () => {
     
 
     function addSystemMessage(message, isError = false) {
-        const timestamp = new Date().toLocaleTimeString('sr-RS', { hour12: use12hFormat });
-        const tsSpan = showTimestampCheckbox.checked ? `<span class="timestamp">[${timestamp}]</span> ` : '';
-    
-        let msg;
-        if (message.startsWith("<system message>")) {
-            const content = message.slice(17);
-            msg = `<span class="system-message">&lt;system message&gt;</span>${escapeHtml(content)}`;
-        } else {
-            msg = escapeHtml(message);
+        let line = message;
+        if (showTimestampCheckbox.checked) {
+            const timestamp = new Date().toLocaleTimeString('sr-RS', {hour12: use12hFormat});
+            line = `[${timestamp}] ${message}`;
         }
-    
-        const fullLine = `${tsSpan}${msg}`;
-        displayedLines.push(fullLine);
+        displayedLines.push(line);
         totalLinesReceived++;
         applyMaxLinesLimit();
         updateOutputDisplay();
         if (isError) console.error(message); else console.log(message);
     }
-    
-        
 
     function formatLine(line) {
         const format = document.getElementById('displayFormat').value;
@@ -344,7 +324,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
             if (showTimestampCheckbox.checked) {
                 const timestamp = new Date().toLocaleTimeString('sr-RS', { hour12: use12hFormat });
-                formatted = `<span class="timestamp">[${timestamp}]</span> ${formatted}`;
+                formatted = `[${timestamp}] ${formatted}`; // ✅ Dodaj timestamp na već formatiran tekst
             }
         
             displayedLines.push(formatted);
