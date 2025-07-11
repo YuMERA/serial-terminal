@@ -1,3 +1,8 @@
+/*! 
+* Web Serial Terminal v1.0
+* (c) 2025 Mera System - All rights reserved
+* https://mera-system.com
+*/
 document.addEventListener('DOMContentLoaded', () => {
     const connectDisconnectButton = document.getElementById('connectDisconnectButton');
     const baudRateSelect = document.getElementById('baudRate');
