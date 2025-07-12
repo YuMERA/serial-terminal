@@ -61,6 +61,36 @@ document.addEventListener('DOMContentLoaded', () => {
         autoScrollLabel.title = AUTO_SCROLL_ENABLED_TOOLTIP;
     }
 
+    const searchInput = document.getElementById('searchInput');
+    const clearSearchButton = document.getElementById('clearSearchButton');
+    const searchIcon = document.querySelector('.search-icon');
+
+    searchInput.addEventListener('input', () => {
+        clearSearchButton.style.display = searchInput.value.trim().length > 0 ? 'inline' : 'none';
+    });
+
+    clearSearchButton.addEventListener('click', () => {
+        searchInput.value = '';
+        clearSearchButton.style.display = 'none';
+        const lines = receivedDataOutput.querySelectorAll('.log-line');
+        lines.forEach(line => line.style.display = '');
+    });
+
+    searchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') performSearch();
+    });
+
+    searchIcon.addEventListener('click', performSearch);
+
+    function performSearch() {
+        const term = searchInput.value.toLowerCase().trim();
+        const lines = receivedDataOutput.querySelectorAll('.log-line');
+        lines.forEach(line => {
+            const text = line.innerText.toLowerCase();
+            line.style.display = (!term || text.includes(term)) ? '' : 'none';
+        });
+    }
+
     function escapeHtml(str) {
         return str.replace(/[&<>"']/g, function (m) {
             switch (m) {
@@ -236,14 +266,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateOutputDisplay() {
-        let previousScrollTop = receivedDataOutput.scrollTop; // zapamti poziciju
-        receivedDataOutput.innerHTML = displayedLines.join('<br>');
+        let previousScrollTop = receivedDataOutput.scrollTop;
     
-        // Učitaj iz localStorage vrednost za autoClear
+        // Umesto <br>, sada svaka linija ide kao <div class="log-line">
+        receivedDataOutput.innerHTML = displayedLines
+            .map(line => `<div class="log-line">${line}</div>`)
+            .join('');
+    
+        // Ažuriraj prikaz AutoClear statusa
         const storedSettings = JSON.parse(localStorage.getItem('serialSettings')) || {};
         const autoClearMin = storedSettings.autoClearMinutes || 0;
     
-        // Ažuriraj prikaz AutoClear statusa
         const autoClearStatus = document.getElementById('autoClearStatus');
         let autoClearText = '';
     
@@ -261,11 +294,11 @@ document.addEventListener('DOMContentLoaded', () => {
     
         autoClearStatus.innerHTML = `<span class="autoclear-label">${autoClearText}</span>`;
     
-        // Ažuriraj prikaz linija i buffera
+        // Linije i buffer info
         document.getElementById('lineCount').textContent = totalLinesReceived;
         document.getElementById('bufferSize').textContent = maxLinesToDisplay;
     
-        // Skrolovanje
+        // Scroll behavior
         if (!scrollLocked) {
             receivedDataOutput.scrollTop = receivedDataOutput.scrollHeight;
         } else {
@@ -274,6 +307,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
         updateAutoScrollAvailability();
     }
+    
     
 
     function addSystemMessage(message, isError = false) {
@@ -507,7 +541,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     clearOutputButton.addEventListener('click', () => {
-        receivedDataOutput.value = '';
+        receivedDataOutput.innerHTML = '';
         displayedLines = [];
         pendingLines = [];
         totalLinesReceived = 0;
@@ -519,7 +553,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     saveOutputButton.addEventListener('click', () => {
-        const text = receivedDataOutput.value;
+        const text = receivedDataOutput.innerHTML;
         if (!text.trim()) {
             alert('Nothing to save.');
             return;
@@ -536,7 +570,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     copyOutputButton.addEventListener('click', async () => {
-        const text = receivedDataOutput.value;
+        const text = receivedDataOutput.innerHTML;
         if (!text.trim()) {
             alert('Nothing to copy.');
             return;

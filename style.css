@@ -84,8 +84,8 @@ h2 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
-    padding: 15px;
+    margin-bottom: 15px;
+    padding: 10px;
     border: 1px solid var(--border-color);
     border-radius: 8px;
     /*background-color: #f9f9f9;*/
@@ -162,7 +162,7 @@ select {
     background-position: right 10px center;
     background-size: 12px;
     padding-right: 30px; /* Prostor za strelicu */
-    margin-bottom: 10px;
+    /*margin-bottom: 10px;*/
 }
 select:focus {
     outline: none;
@@ -185,7 +185,7 @@ select:focus {
     display: flex;
     justify-content: space-between; /* Razmak između H2 i Max Lines */
     align-items: center; /* Vertikalno poravnanje */
-    margin-bottom: 10px;
+    /*margin-bottom: 10px;*/
     flex-wrap: wrap; /* Omogućava prelamanje na manjim ekranima */
     gap: 10px; /* Razmak između elemenata kada se prelome */
 }
@@ -208,7 +208,7 @@ select:focus {
 
 #sendInput {
     flex-grow: 1;
-    padding: 10px 12px;
+    padding: 8px 10px;
     border: 1px solid var(--mod-border-color);
     border-radius: 4px;
     font-size: 1em;
@@ -261,7 +261,7 @@ select:focus {
 #receivedDataOutput {
     width: 100%;
     box-sizing: border-box;
-    padding-left: 10px;
+    padding-left: 5px;
     border: 1px solid var(--border-color);
     border-radius: 4px;
     font-family: 'Consolas', 'Monaco', monospace;
@@ -296,24 +296,17 @@ select:focus {
 
 #statusGroup {
     display: flex;
-    align-items: center;
+    /*align-items:end;
     justify-content: flex-end; /* ➜ Prikaz desno */
-    gap: 10px;
-    font-size: 0.9em;
-    color: #666;
-    padding: 4px 8px;
+    justify-content: space-between;
+    /*gap: 10px;
+    /*font-size: 0.9em;
+    color: #666;*/
+    padding: 4px 5px 2px 0;
+    margin-bottom: 5px;
     flex-wrap: wrap;
 }
 
-#statusGroup span {
-    padding: 2px;
-    border-radius: 4px;
-    font-weight: bold;
-    font-size: 0.9em;
-    white-space: nowrap;
-    border: 1px solid var(--border-color);
-    /* border: 1px solid transparent;*/
-}
 
 /* 🟥 AutoClear badge */
 #autoClearStatus {
@@ -761,10 +754,19 @@ select:focus {
 .modal-content #settings-content{   
     background-color: var(--set-conntent-bg);
     border: 1px solid var(--border-color);
-    padding: 12px 16px;
-    margin-bottom: 12px;
+    padding: 5px 16px;
+    margin-bottom: 8px;
     border-radius: 6px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+#modalMaxLines{
+    width: 100px;
+}
+
+#modalMaxLines:focus{
+    outline: none;
+    border-color: var(--badge-lines-text);
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
 }
 
 .modal-content label {
@@ -772,7 +774,7 @@ select:focus {
     display: flex;
     align-items: center;
     gap: 8px;  /* Razmak između checkboxa i teksta */
-    margin: 10px 0;
+    /*margin: 10px 0;*/
 }
 
 .modal-content input {
@@ -781,7 +783,7 @@ select:focus {
     /*width: 100%;*/
     padding: 8px;
     font-size: 1em;
-    margin-bottom: 10px;
+    /*margin-bottom: 10px;*/
     border: 1px solid var(--mod-border-color);
     border-radius: 4px;
 }
@@ -808,7 +810,6 @@ select:focus {
 .modal-content li {
     line-height: 1.5em;
     color: var(--text-color);
-    /*color: var(--info-entry-description);*/
 }
 .modal-content p{
     color: var(--info-entry-description);
@@ -818,9 +819,13 @@ select:focus {
     width: 100%;
     padding: 8px;
     font-size: 1em;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
     border-radius: 4px;
+}
+
+#modalLineEnding:focus{
+    outline: none;
+    border-color: var(--badge-lines-text);
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
 }
 
 .close-button {
@@ -835,7 +840,7 @@ select:focus {
     color: red;
 }
 
-/* ✅ Ikone iznad terminal sekcije */
+/* Ikone iznad terminal sekcije */
 .top-icons {
     display: flex;
     justify-content: flex-end;
@@ -882,13 +887,6 @@ select:focus {
 .at-command-item:hover {
     background-color: var(--badge-lines-text);
     color: white;
-}
-
-.input-with-clear {
-    position: relative;
-    flex-grow: 1;
-    display: flex;
-    align-items: center;
 }
 
 #clearInputButton {
@@ -964,3 +962,74 @@ select:focus {
     color: #dc3545; /* Crvena */
     font-weight: bold;
 }
+
+.search-bar-wrapper {
+    display: flex;
+    gap: 2px;
+    flex-wrap: wrap; /* Da se input i dugme prelamaju na manjim ekranima */
+    align-items: center; /* Vertikalno poravnanje inputa i dugmeta */
+}
+
+#searchInput {
+    flex-grow: 1;
+    padding: 8px 10px;
+    border: 1px solid var(--mod-border-color);
+    border-radius: 4px;
+    font-size: 1em;
+    color: var(--text-color);
+    background-color: var(--input-bg);
+    min-width: 150px;
+    flex-shrink: 1;
+    padding-right: 30px; /* Prostor za X dugme */
+}
+#searchInput:focus{
+    outline: none;
+    border-color: var(--badge-lines-text);
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.search-icon {
+    font-size: 1.4em;
+    color: #666;
+    user-select: none;
+    border: 1px solid var(--mod-border-color);
+}
+
+.input-with-clear {
+    position: relative;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+}
+
+.input-with-clear input {
+    width: 100%;
+}
+
+#clearSearchButton {
+    position: absolute;
+    right: 10px;
+    font-size: 24px;
+    color: #888;
+    cursor: pointer;
+    display: none;
+    user-select: none;
+}
+
+#clearSearchButton:hover {
+    color: #000;
+}
+
+#badge{
+    display: flex;
+    align-items:end;
+    gap: 10px;
+    font-size: 0.75em;
+    font-weight: bold;
+    flex-wrap: wrap;
+}
+
+.log-line{
+    margin: 1px 0;
+}
+

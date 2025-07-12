@@ -66,7 +66,7 @@
             </div>
 
             <div class="send-input-wrapper">
-                <!-- IZMENJENI DEO -->
+    
                 <div class="send-input-row">
                     <div class="input-with-clear">
                         <input type="text" id="sendInput" placeholder="Enter command to send...">
@@ -82,7 +82,7 @@
                         <option value="cr">Carriage Return (CR)</option>
                         <option value="crlf">Both NL & CR (CRLF)</option>
                     </select>
-                    <label for="displayFormat" style="color: #888; margin-left: 20px; margin-right: 5px; margin-bottom: 10px;">Display Format:</label>
+                    <label for="displayFormat" style="color: #888; margin-left: 20px; margin-right: 5px;">Display Format:</label>
                     <select id="displayFormat">
                         <option value="normal">Normal</option>
                         <option value="hex">Hex</option>
@@ -93,9 +93,19 @@
 
             <div class="terminal-output-wrapper">
                 <div id="statusGroup">
-                    <span id="autoClearStatus"></span>
-                    <span id="lineCountStatus">Lines: <span id="lineCount">0</span></span>
-                    <span id="bufferStatus">Buffer: <span id="bufferSize">2000</span></span>
+                    <div class="search-bar-wrapper">
+                        <div class="input-with-clear">
+                            <input type="text" id="searchInput" placeholder="Search output..." title="Search terminal output">
+                            <span id="clearSearchButton" title="Clear search">&times;</span>
+                        </div>
+                        <span class="search-icon" title="Search">🔍</span>
+                    </div>                  
+                    <div id="badge">
+                        <span id="autoClearStatus"></span>
+                        <span id="lineCountStatus">Lines: <span id="lineCount">0</span></span>
+                        <span id="bufferStatus">Buffer: <span id="bufferSize">2000</span></span>
+                    </div>
+                        
                 </div>
                 <!-- <textarea id="receivedDataOutput" readonly></textarea> -->
                 <div id="receivedDataOutput" class="output-terminal"></div>
@@ -136,7 +146,7 @@
             <h3>Settings</h3>
             <div id="settings-content">
                 <label for="modalMaxLines">Max Buffer Lines:</label>
-                <input type="number" id="modalMaxLines" min="100" step="100" value="2000" style="width: 100px;">
+                <input type="number" id="modalMaxLines" min="100" step="100" value="2000">
             </div>
 
             <div id="settings-content">
