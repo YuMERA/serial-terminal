@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const pauseOutputCheckbox = document.getElementById('pauseOutput');
     pauseOutputCheckbox.addEventListener('change', () => {
         updateOutputDisplay();
+        updateSearchInputAvailability();
     });
     
 
@@ -50,6 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     autoScrollCheckbox.addEventListener('change', () => {
         scrollLocked = !autoScrollCheckbox.checked;
+        updateSearchInputAvailability();
     });
     
     // Tooltip tekst
@@ -64,9 +66,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('searchInput');
     const clearSearchButton = document.getElementById('clearSearchButton');
     const searchIcon = document.querySelector('.search-icon');
-
+    const searchCountSpan = document.getElementById('searchCountSpan');
+    
     searchInput.addEventListener('input', () => {
         clearSearchButton.style.display = searchInput.value.trim().length > 0 ? 'inline' : 'none';
+        filterSearchResults();
     });
 
     clearSearchButton.addEventListener('click', () => {
@@ -74,11 +78,22 @@ document.addEventListener('DOMContentLoaded', () => {
         clearSearchButton.style.display = 'none';
         const lines = receivedDataOutput.querySelectorAll('.log-line');
         lines.forEach(line => line.style.display = '');
+        filterSearchResults();
     });
 
     searchInput.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') performSearch();
     });
+
+    function clearSearchUI() {
+        if (searchInput) searchInput.value = '';
+        if (searchCountSpan) {
+            searchCountSpan.textContent = '';
+            searchCountSpan.style.display = 'none';
+        }
+        if (clearSearchButton) clearSearchButton.style.display = 'none';
+    }
+    
 
     searchIcon.addEventListener('click', performSearch);
 
@@ -126,6 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let keepReading = false;
     let pendingLines = [];
     let displayedLines = [];
+    let rawLines = [];
     let totalLinesReceived = 0;
     let updateTimer = null;
     const UPDATE_INTERVAL_MS = 100;
@@ -308,9 +324,43 @@ document.addEventListener('DOMContentLoaded', () => {
         updateAutoScrollAvailability();
     }
     
+    function filterSearchResults() {
+        const query = searchInput.value.trim().toLowerCase();
+        let matchCount = 0;
     
+        const filteredLines = rawLines
+            .filter(line => {
+                if (!query) return true;
+                return line.toLowerCase().includes(query);
+            })
+            .map(line => {
+                if (!query) return wrapLine(escapeHtml(line));
+                const regex = new RegExp(`(${query})`, 'gi');
+                const highlighted = escapeHtml(line).replace(regex, '<mark>$1</mark>');
+                matchCount++;
+                return wrapLine(highlighted);
+            });
+    
+        receivedDataOutput.innerHTML = filteredLines.join('');
+    
+        if (query && matchCount > 0) {
+            searchCountSpan.textContent = `(${matchCount})`;
+            searchCountSpan.style.display = 'inline-block';
+        } else {
+            searchCountSpan.style.display = 'none';
+        }
+    
+        if (!scrollLocked) {
+            receivedDataOutput.scrollTop = receivedDataOutput.scrollHeight;
+        }
+    }
+    
+    
+       
 
     function addSystemMessage(message, isError = false) {
+        rawLines.push(message); // Sačuvaj sirovi tekst
+
         const timestamp = new Date().toLocaleTimeString('sr-RS', { hour12: use12hFormat });
         const tsSpan = showTimestampCheckbox.checked ? `<span class="timestamp">[${timestamp}]</span> ` : '';
     
@@ -374,6 +424,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateOutput() {
         if (pendingLines.length === 0) return;
         for (const line of pendingLines) {
+            rawLines.push(line); // Sačuvaj sirov tekst
+
             let formatted = formatLine(line); // Poštuje normal/hex/json
         
             if (showTimestampCheckbox.checked) {
@@ -441,6 +493,7 @@ document.addEventListener('DOMContentLoaded', () => {
             lineCountDisplay.innerHTML = `${statusText}Lines: <span id="lineCount">${totalLinesReceived}</span>  |  Buffer: <span id="bufferSize">${maxLinesToDisplay}</span>`;
         }
         updateAutoScrollAvailability();
+        clearSearchUI();
     }
 
     async function portDisconnect() {
@@ -491,6 +544,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 port = null;
 
                 portDisconnect();
+                updateSearchInputAvailability();
             } catch (e) {
                 addSystemMessage(`<system message> - Error disconnecting: ${e.message}`, true);
             }
@@ -502,7 +556,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 port = await navigator.serial.requestPort();
                 const storedSettings = JSON.parse(localStorage.getItem('serialSettings')) || {};
                 const baudRate = storedSettings.baudRate || parseInt(baudRateSelect.value);
-
 
                 await port.open({
                     baudRate,
@@ -517,6 +570,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 keepReading = true;
                 autoScrollCheckbox.checked = true;
                 scrollLocked = false;
+                updateSearchInputAvailability();
 
                 connectDisconnectButton.textContent = 'Disconnect';
                 connectDisconnectButton.classList.remove('connect');
@@ -550,17 +604,20 @@ document.addEventListener('DOMContentLoaded', () => {
         
         lineCountSpan.textContent = totalLinesReceived;
         bufferSizeDisplay.textContent = maxLinesToDisplay;
+        clearSearchUI();
     });
 
     saveOutputButton.addEventListener('click', () => {
-        const text = receivedDataOutput.innerHTML;
-        if (!text.trim()) {
+        if (rawLines.length === 0) {
             alert('Nothing to save.');
             return;
         }
+    
+        const formatted = rawLines.map(line => formatLine(line)).join('\n');
         const now = new Date();
         const fileName = `serial_log_${now.toISOString().replace(/[:.]/g, '-')}.txt`;
-        const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+        const blob = new Blob([formatted], { type: 'text/plain;charset=utf-8' });
+    
         const a = document.createElement('a');
         a.href = URL.createObjectURL(blob);
         a.download = fileName;
@@ -568,15 +625,19 @@ document.addEventListener('DOMContentLoaded', () => {
         a.click();
         a.remove();
     });
+    
 
     copyOutputButton.addEventListener('click', async () => {
-        const text = receivedDataOutput.innerHTML;
-        if (!text.trim()) {
+        if (rawLines.length === 0) {
             alert('Nothing to copy.');
             return;
         }
+    
+        const formatted = rawLines.map(line => formatLine(line)).join('\n');
+    
         try {
-            await navigator.clipboard.writeText(text);
+            await navigator.clipboard.writeText(formatted);
+    
             const popup = window.open('', '_blank', 'width=800,height=600,left=200,top=100,resizable=yes,scrollbars=yes');
             popup.document.write(`
                 <html>
@@ -586,7 +647,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             pre { white-space: pre-wrap; word-wrap: break-word; background: #f4f4f4; padding: 10px; }
                         </style>
                     </head>
-                    <body><h2>Copied to Clipboard:</h2><pre>${text.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</pre></body>
+                    <body><h2>Copied to Clipboard:</h2><pre>${escapeHtml(formatted)}</pre></body>
                 </html>
             `);
             popup.document.close();
@@ -594,6 +655,7 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Clipboard copy failed.');
         }
     });
+    
 
     sendButton.addEventListener('click', sendSerialData);
     sendInput.addEventListener('keydown', (e) => {
@@ -623,6 +685,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 addSystemMessage(`<system message> - Send error: ${err.message}`, true);
             }
         }
+        clearSearchUI();
     }
 
     // Modal logika
@@ -922,6 +985,28 @@ document.addEventListener('DOMContentLoaded', () => {
         updateThemeIcon(newTheme);
     });
 
+    function updateSearchInputAvailability() {
+        const pauseOutputOn = pauseOutputCheckbox.checked;
+        const isDisconnected = !keepReading;
+    
+        if (pauseOutputOn || isDisconnected) {
+            searchInput.disabled = false;
+            searchInput.placeholder = "Search output...";
+        } else {
+            searchInput.disabled = true;
+            searchInput.placeholder = "Pause output or disconnect to search";
+            clearSearchUI(); // poništi rezultat pretrage ako više nije validan
+        }
+    }
+
+    function wrapLine(content) {
+        const timestamp = new Date().toLocaleTimeString('sr-RS', { hour12: use12hFormat });
+        const tsSpan = showTimestampCheckbox.checked ? `<span class="timestamp">[${timestamp}]</span> ` : '';
+        return `<div class="log-line">${tsSpan}${content}</div>`;
+    }
+    
+    
+
     applyThemeFromStorage(); // ✅ Pozovi odmah da se tema učita
 
 
@@ -935,4 +1020,5 @@ document.addEventListener('DOMContentLoaded', () => {
     bufferSizeDisplay.textContent = maxLinesToDisplay;
     
     updateOutputDisplay();
+    updateSearchInputAvailability();
 });

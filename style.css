@@ -1033,3 +1033,16 @@ select:focus {
     margin: 1px 0;
 }
 
+.search-count {
+    font-size: 0.8em;
+    color: #007bff;
+    margin-left: 4px;
+}
+
+/*#searchInput:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: #ccc; 
+    color: #666;            
+}*/
+
