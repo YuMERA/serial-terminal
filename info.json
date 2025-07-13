@@ -1,5 +1,16 @@
 [
   {
+    "title": "Export Button for CSV/JSON Output",
+    "timestamp": "2025-07-12 20:30",
+    "description": "A new Export button allows users to save the terminal buffer in either CSV or JSON format. The export respects the timestamp setting and prompts the user for format selection."
+  },
+  {
+    "title": "Export Button Styling with Theme Support",
+    "timestamp": "2025-07-12 20:10",
+    "description": "The Export button is styled in purple to distinguish it from existing action buttons. It supports both light and dark themes with consistent appearance."
+  },
+  
+  {
     "title": "RTS/DTR Status Indicators",
     "timestamp": "2025-07-12 17:30",
     "description": "Visual indicators for RTS and DTR have been added next to the terminal controls, using colored circles (green for on, red for off) along with a tooltip. Status updates automatically on Connect, Save Settings, or Reset."
