@@ -57,7 +57,7 @@ body {
 
 .container {
     background-color: var(--container-bg);
-    padding: 10px 30px;
+    padding: 10px 20px;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     width: 100%;
@@ -357,11 +357,8 @@ select:focus {
     gap: 10px; /* Razmak između dugmadi */
     flex-wrap: wrap;
 }
-
-/* Stilovi za Save i Copy dugmad */
-.bottom-save-button {
-    background-color: var(--badge-lines-text); /* Plava boja za Save */
-    color: var(--input-bg);
+.output-action-buttons button {
+    
     padding: 8px 15px;
     font-size: 0.9em;
     font-weight: bold;
@@ -369,6 +366,12 @@ select:focus {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+}
+
+/* Stilovi za Save i Copy dugmad */
+.bottom-save-button {
+    background-color: var(--badge-lines-text); /* Plava boja za Save */  
+    color: var(--input-bg);  
 }
 .bottom-save-button:hover {
     background-color: #0056b3;
@@ -378,13 +381,6 @@ select:focus {
 .bottom-copy-button {
     background-color: #6c757d; /* Siva boja za Copy */
     color: var(--input-bg);
-    padding: 8px 15px;
-    font-size: 0.9em;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 .bottom-copy-button:hover {
     background-color: #5a6268;
@@ -394,18 +390,22 @@ select:focus {
 /* Postojeći stil za Clear dugme u donjem delu */
 .bottom-clear-button {
     background-color: #ffc107; /* Žuta boja */
-    /*color: var(--text-color);*/
-    padding: 8px 15px;
-    font-size: 0.9em;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    color: #000;
 }
 .bottom-clear-button:hover {
     background-color: #e0a800;
 }
+
+.bottom-export-button {
+    background-color: #6f42c1; /* ljubičasta */
+    color: #d6d6d6;
+}
+
+.bottom-export-button:hover {
+    background-color: #5936a2;
+    color: white;
+}
+
 
 /* Grupa koja sadrži samo checkboxove (Max Lines je premešten) */
 .options-group {
@@ -419,7 +419,8 @@ select:focus {
 /* Grupa za checkboxove */
 .checkbox-group {
     display: flex;
-    gap: 20px;
+    gap: 10px;
+    font-size: 0.9em;
 }
 
 .display-options-bottom label {
@@ -518,7 +519,7 @@ select:focus {
 /* ======================================= */
 
 /* Media Query za ekrane širine do 650px (manji ekrani, telefoni) */
-@media (max-width: 650px) {
+@media (max-width: 700px) {
     .container {
         padding: 10px 20px;
         margin: 10px;
@@ -650,6 +651,16 @@ select:focus {
         gap: 10px;
         width: 100%;
     }
+    .signal-status {
+        padding-top: 10px;
+        margin-left: 10px;
+    }
+    #badge {
+        padding-top: 5px;
+    }
+    #displayFormat{
+        margin-top: 10px;
+    }
 }
 
 /* Media Query za ekrane širine do 400px (vrlo mali telefoni) */
@@ -701,6 +712,10 @@ select:focus {
     .max-lines-input input[type="number"] {
         padding: 6px 8px;
         font-size: 0.9em;
+    }
+    .signal-status {
+        padding-top: 10px;
+        margin-left: 10px;
     }
 }
 

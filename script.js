@@ -1109,6 +1109,48 @@ document.addEventListener('DOMContentLoaded', () => {
         return `<div class="log-line">${tsSpan}${content}</div>`;
     }
     
+    document.getElementById('exportOutputButton').addEventListener('click', () => {
+        const format = prompt("Export format: type 'csv' or 'json'", "csv");
+        if (format === 'csv' || format === 'json') {
+            exportData(format);
+        } else if (format !== null) {
+            alert("Unsupported format.");
+        }
+    });
+
+    function exportData(format = 'csv') {
+        const useTimestamps = showTimestampCheckbox.checked;
+        const lines = useTimestamps ? rawLinesWithTimestamp : rawLines;
+    
+        if (lines.length === 0) {
+            alert("Nothing to export.");
+            return;
+        }
+    
+        let content = '';
+        let mime = 'text/plain';
+        let extension = format;
+    
+        if (format === 'csv') {
+            content = 'Line Number,Data\n' + lines.map((line, i) =>
+                `${i + 1},"${line.replace(/"/g, '""')}"`
+            ).join('\n');
+            mime = 'text/csv';
+        } else if (format === 'json') {
+            const json = lines.map((line, i) => ({
+                line: i + 1,
+                data: line
+            }));
+            content = JSON.stringify(json, null, 2);
+            mime = 'application/json';
+        }
+    
+        const blob = new Blob([content], { type: mime });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = `serial_export_${new Date().toISOString().replace(/[:.]/g, '-')}.${extension}`;
+        a.click();
+    }
     
 
     applyThemeFromStorage(); // ✅ Pozovi odmah da se tema učita
