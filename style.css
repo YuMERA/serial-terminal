@@ -648,7 +648,7 @@ select:focus {
 }
 
 /* Media Query za ekrane širine do 400px (vrlo mali telefoni) */
-@media (max-width: 400px) {
+@media (max-width: 420px) {
     h1 {
         font-size: 1.4em;
     }
@@ -676,6 +676,9 @@ select:focus {
     #receivedDataOutput {
         font-size: 0.85em;
         height: 120px;
+    }
+    #searchInput {
+        width: 150px;
     }
     .bottom-clear-button,
     .bottom-save-button,
@@ -797,9 +800,9 @@ select:focus {
 .modal-content button {
     padding: 10px 15px;
     font-weight: bold;
-    background-color: var(--badge-lines-text);
+    background-color: #007bff;
     border: none;
-    color: var(--input-bg);
+    color: white;
     border-radius: 4px;
     cursor: pointer;
 }

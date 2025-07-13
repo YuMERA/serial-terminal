@@ -141,7 +141,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let keepReading = false;
     let pendingLines = [];
     let displayedLines = [];
-    let rawLines = [];
+    let rawLines = []; // samo čisti podaci 
+    let rawLinesWithTimestamp = []; // novi niz za Save/Copy ako timestamp treba
+
     let totalLinesReceived = 0;
     let updateTimer = null;
     const UPDATE_INTERVAL_MS = 100;
@@ -362,8 +364,17 @@ document.addEventListener('DOMContentLoaded', () => {
         rawLines.push(message); // Sačuvaj sirovi tekst
 
         const timestamp = new Date().toLocaleTimeString('sr-RS', { hour12: use12hFormat });
-        const tsSpan = showTimestampCheckbox.checked ? `<span class="timestamp">[${timestamp}]</span> ` : '';
-    
+        const tsText = `[${timestamp}] `;
+
+        // Dodaj u drugi niz ako je timestamp prikaz aktivan
+        if (showTimestampCheckbox.checked) {
+            rawLinesWithTimestamp.push(tsText + message);
+        } else {
+            rawLinesWithTimestamp.push(message);
+        }
+
+        const tsSpan = showTimestampCheckbox.checked ? `<span class="timestamp">${tsText}</span>` : '';
+        
         let msg;
         if (message.startsWith("<system message>")) {
             const content = message.slice(17);
@@ -371,7 +382,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             msg = escapeHtml(message);
         }
-    
+
         const fullLine = `${tsSpan}${msg}`;
         displayedLines.push(fullLine);
         totalLinesReceived++;
@@ -379,6 +390,7 @@ document.addEventListener('DOMContentLoaded', () => {
         updateOutputDisplay();
         if (isError) console.error(message); else console.log(message);
     }
+
     
         
 
@@ -424,23 +436,28 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateOutput() {
         if (pendingLines.length === 0) return;
         for (const line of pendingLines) {
-            rawLines.push(line); // Sačuvaj sirov tekst
+            rawLines.push(line); // Sirova linija
 
-            let formatted = formatLine(line); // Poštuje normal/hex/json
-        
+            const timestamp = new Date().toLocaleTimeString('sr-RS', { hour12: use12hFormat });
+            const tsText = `[${timestamp}] `;
+            const formattedLine = formatLine(line);
+
             if (showTimestampCheckbox.checked) {
-                const timestamp = new Date().toLocaleTimeString('sr-RS', { hour12: use12hFormat });
-                formatted = `<span class="timestamp">[${timestamp}]</span> ${formatted}`;
+                rawLinesWithTimestamp.push(tsText + line); // Dodaj u novi niz sa timestamp-om
+                displayedLines.push(`<span class="timestamp">${tsText}</span> ${formattedLine}`);
+            } else {
+                rawLinesWithTimestamp.push(line); // bez timestamp-a
+                displayedLines.push(formattedLine);
             }
-        
-            displayedLines.push(formatted);
+
             totalLinesReceived++;
         }
-        
+
         pendingLines = [];
         applyMaxLinesLimit();
         updateOutputDisplay();
     }
+
 
     async function readSerialPort() {
         const decoder = new TextDecoderStream();
@@ -608,16 +625,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     saveOutputButton.addEventListener('click', () => {
-        if (rawLines.length === 0) {
+        const useTimestamps = showTimestampCheckbox.checked;
+        const linesToSave = useTimestamps ? rawLinesWithTimestamp : rawLines;
+
+        if (linesToSave.length === 0) {
             alert('Nothing to save.');
             return;
         }
-    
-        const formatted = rawLines.map(line => formatLine(line)).join('\n');
+
+        const formatted = linesToSave.map(line => formatLine(line)).join('\n');
         const now = new Date();
         const fileName = `serial_log_${now.toISOString().replace(/[:.]/g, '-')}.txt`;
         const blob = new Blob([formatted], { type: 'text/plain;charset=utf-8' });
-    
+
         const a = document.createElement('a');
         a.href = URL.createObjectURL(blob);
         a.download = fileName;
@@ -625,19 +645,23 @@ document.addEventListener('DOMContentLoaded', () => {
         a.click();
         a.remove();
     });
+
     
 
     copyOutputButton.addEventListener('click', async () => {
-        if (rawLines.length === 0) {
+        const useTimestamps = showTimestampCheckbox.checked;
+        const linesToCopy = useTimestamps ? rawLinesWithTimestamp : rawLines;
+
+        if (linesToCopy.length === 0) {
             alert('Nothing to copy.');
             return;
         }
-    
-        const formatted = rawLines.map(line => formatLine(line)).join('\n');
-    
+
+        const formatted = linesToCopy.map(line => formatLine(line)).join('\n');
+
         try {
             await navigator.clipboard.writeText(formatted);
-    
+
             const popup = window.open('', '_blank', 'width=800,height=600,left=200,top=100,resizable=yes,scrollbars=yes');
             popup.document.write(`
                 <html>
@@ -655,6 +679,7 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Clipboard copy failed.');
         }
     });
+
     
 
     sendButton.addEventListener('click', sendSerialData);
