@@ -113,6 +113,7 @@ h2 {
 
 #connectDisconnectButton.connect:hover:not([disabled]) {
     background-color: #c82333;
+    color: white;
     transform: translateY(-1px);
 }
 
@@ -123,6 +124,7 @@ h2 {
 
 #connectDisconnectButton.disconnect:hover:not([disabled]) {
     background-color: #218838;
+    color: white;
     transform: translateY(-1px);
 }
 
@@ -239,6 +241,7 @@ select:focus {
 }
 #sendButton:hover:not([disabled]) {
     background-color: #138496;
+    color: white;
     transform: translateY(-1px);
 }
 
@@ -369,6 +372,7 @@ select:focus {
 }
 .bottom-save-button:hover {
     background-color: #0056b3;
+    color: white;
 }
 
 .bottom-copy-button {
@@ -384,6 +388,7 @@ select:focus {
 }
 .bottom-copy-button:hover {
     background-color: #5a6268;
+    color: white;
 }
 
 /* Postojeći stil za Clear dugme u donjem delu */
@@ -810,10 +815,14 @@ select:focus {
 .modal-content button:hover {
     background-color: #0056b3;
 }
+
+
+
 .modal-content li {
-    line-height: 1.5em;
+    line-height: 1.6em;
     color: var(--text-color);
 }
+
 .modal-content p{
     color: var(--info-entry-description);
 }
@@ -1049,3 +1058,50 @@ select:focus {
     color: #666;            
 }*/
 
+.serial-setting-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.serial-setting-row label {
+    font-size: 0.95em;
+    color: var(--text-color);
+}
+
+.serial-label {
+    min-width: 95px;
+}
+
+.signal-status {
+    display: flex;
+    color: #888;
+    gap: 15px;
+    margin-left: auto;
+    margin-top: auto;
+}
+
+.signal-indicator {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.75em;
+    cursor: default;
+    white-space: nowrap;
+}
+
+.signal-indicator .circle {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #ccc;
+}
+
+.signal-indicator.on .circle {
+    background-color: #28a745;; /* zelena */
+}
+
+.signal-indicator.off .circle {
+    background-color: #dc3545; /* crvena */
+}

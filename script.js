@@ -67,6 +67,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const clearSearchButton = document.getElementById('clearSearchButton');
     const searchIcon = document.querySelector('.search-icon');
     const searchCountSpan = document.getElementById('searchCountSpan');
+
+    // Helper funkcija za promenu DTR/RTS
+    function updateRtsDtrDisplay(rtsValue, dtrValue) {
+        const rtsStatus = document.getElementById('rtsStatus');
+        const dtrStatus = document.getElementById('dtrStatus');
+        if (!rtsStatus || !dtrStatus) return;
+    
+        const rtsText = rtsStatus.querySelector('span:last-child');
+        const dtrText = dtrStatus.querySelector('span:last-child');
+    
+        rtsStatus.classList.toggle('on', rtsValue);
+        rtsStatus.classList.toggle('off', !rtsValue);
+        if (rtsText) rtsText.textContent = rtsValue ? 'on' : 'off';
+    
+        dtrStatus.classList.toggle('on', dtrValue);
+        dtrStatus.classList.toggle('off', !dtrValue);
+        if (dtrText) dtrText.textContent = dtrValue ? 'on' : 'off';
+    }
+    
     
     searchInput.addEventListener('input', () => {
         clearSearchButton.style.display = searchInput.value.trim().length > 0 ? 'inline' : 'none';
@@ -151,9 +170,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // Deo koji obradjuje options setovanje i default vrednosti
     const DEFAULT_SETTINGS = {
         maxLines: 2000,
-        baudRate: 115200,
         showTimestamp: false,
+        baudRate: 115200,
         lineEnding: 'lf',
+        dataBits: 8,
+        stopBits: 1,
+        parity: 'none',
+        flowControl: 'none',
+        rts: true,
+        dtr: true,
         use12h: false,
         autoClearMinutes: 0
     };
@@ -212,6 +237,22 @@ document.addEventListener('DOMContentLoaded', () => {
             setupAutoClear(settings.autoClearMinutes);
         }
 
+        // Data Bits
+        document.querySelector(`input[name="dataBits"][value="${settings.dataBits ?? DEFAULT_SETTINGS.dataBits}"]`).checked = true;
+
+        // Stop Bits
+        document.querySelector(`input[name="stopBits"][value="${settings.stopBits ?? DEFAULT_SETTINGS.stopBits}"]`).checked = true;
+
+        // Parity
+        document.querySelector(`input[name="parity"][value="${settings.parity ?? DEFAULT_SETTINGS.parity}"]`).checked = true;
+
+        // Flow Control
+        document.querySelector(`input[name="flowControl"][value="${settings.flowControl ?? DEFAULT_SETTINGS.flowControl}"]`).checked = true;
+
+        const rtsCheckbox = document.getElementById('modalRTS');
+        const dtrCheckbox = document.getElementById('modalDTR');
+        if (rtsCheckbox) rtsCheckbox.checked = settings.rts ?? DEFAULT_SETTINGS.rts;
+        if (dtrCheckbox) dtrCheckbox.checked = settings.dtr ?? DEFAULT_SETTINGS.dtr;
     }
     
     // Funkcija za čuvanje podešavanja
@@ -226,12 +267,25 @@ document.addEventListener('DOMContentLoaded', () => {
         const tsCheckbox = document.getElementById('modalDefaultTimestamp');
         const lineEndingSelectModal = document.getElementById('modalLineEnding');
         const use12hCheckbox = document.getElementById('modalUse12h');
+        const selectedDataBits = document.querySelector('input[name="dataBits"]:checked')?.value;
+        const selectedStopBits = document.querySelector('input[name="stopBits"]:checked')?.value;
+        const selectedParity = document.querySelector('input[name="parity"]:checked')?.value;
+        const selectedFlowControl = document.querySelector('input[name="flowControl"]:checked')?.value;
+        const rtsCheckbox = document.getElementById('modalRTS');
+        const dtrCheckbox = document.getElementById('modalDTR');
+
     
         const newSettings = {
             maxLines: newMax,
             baudRate: baudSelect ? parseInt(baudSelect.value) : 115200,
-            showTimestamp: tsCheckbox ? tsCheckbox.checked : false,
             lineEnding: lineEndingSelectModal ? lineEndingSelectModal.value : 'lf',
+            dataBits: parseInt(selectedDataBits),
+            stopBits: parseInt(selectedStopBits),
+            parity: selectedParity,
+            flowControl: selectedFlowControl,
+            rts: rtsCheckbox?.checked ?? false,
+            dtr: dtrCheckbox?.checked ?? false,
+            showTimestamp: tsCheckbox ? tsCheckbox.checked : false,
             use12h: use12hCheckbox ? use12hCheckbox.checked : false,
             autoClearMinutes: parseInt(modalAutoClear.value)
         };
@@ -252,6 +306,7 @@ document.addEventListener('DOMContentLoaded', () => {
         saveOutputButton.title = `Only the most recent ${maxLinesToDisplay} lines will be saved. Older lines are discarded from memory.`;
         
         settingsModal.style.display = 'none';
+        updateRtsDtrDisplay(newSettings.rts, newSettings.dtr);
     }
     
 
@@ -260,8 +315,15 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.removeItem('serialSettings');
         modalMaxLines.value = DEFAULT_SETTINGS.maxLines;
         document.getElementById('modalDefaultBaudRate').value = DEFAULT_SETTINGS.baudRate;
-        document.getElementById('modalDefaultTimestamp').checked = DEFAULT_SETTINGS.showTimestamp;
+        document.querySelector(`input[name="dataBits"][value="${DEFAULT_SETTINGS.dataBits}"]`).checked = true;
+        document.querySelector(`input[name="stopBits"][value="${DEFAULT_SETTINGS.stopBits}"]`).checked = true;
+        document.querySelector(`input[name="parity"][value="${DEFAULT_SETTINGS.parity}"]`).checked = true;
+        document.querySelector(`input[name="flowControl"][value="${DEFAULT_SETTINGS.flowControl}"]`).checked = true;
         document.getElementById('modalLineEnding').value = DEFAULT_SETTINGS.lineEnding;
+        document.getElementById('modalRTS').checked = DEFAULT_SETTINGS.rts;
+        document.getElementById('modalDTR').checked = DEFAULT_SETTINGS.dtr;
+
+        document.getElementById('modalDefaultTimestamp').checked = DEFAULT_SETTINGS.showTimestamp;
         document.getElementById('modalUse12h').checked = DEFAULT_SETTINGS.use12h;
         document.getElementById('modalAutoClear').value = DEFAULT_SETTINGS.autoClearMinutes;
         
@@ -274,6 +336,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Osveži prikaz ako treba
         updateOutputDisplay();
         updateAutoScrollAvailability();
+        updateRtsDtrDisplay(DEFAULT_SETTINGS.rts, DEFAULT_SETTINGS.dtr);
     }
     
     function applyMaxLinesLimit() {
@@ -322,6 +385,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             receivedDataOutput.scrollTop = previousScrollTop;
         }
+
     
         updateAutoScrollAvailability();
     }
@@ -378,7 +442,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let msg;
         if (message.startsWith("<system message>")) {
             const content = message.slice(17);
-            msg = `<span class="system-message">&lt;system message&gt;</span>${escapeHtml(content)}`;
+            msg = `<span class="system-message">&lt;system message&gt;</span> ${escapeHtml(content)}`;
         } else {
             msg = escapeHtml(message);
         }
@@ -390,9 +454,6 @@ document.addEventListener('DOMContentLoaded', () => {
         updateOutputDisplay();
         if (isError) console.error(message); else console.log(message);
     }
-
-    
-        
 
     function formatLine(line) {
         const format = document.getElementById('displayFormat').value;
@@ -574,15 +635,33 @@ document.addEventListener('DOMContentLoaded', () => {
                 const storedSettings = JSON.parse(localStorage.getItem('serialSettings')) || {};
                 const baudRate = storedSettings.baudRate || parseInt(baudRateSelect.value);
 
+                const rtsValue = storedSettings.rts ?? true;
+                const dtrValue = storedSettings.dtr ?? true;
                 await port.open({
                     baudRate,
-                    dataBits: 8,
-                    stopBits: 1,
-                    parity: 'none',
-                    flowControl: 'none',
+                    dataBits: storedSettings.dataBits ?? 8,
+                    stopBits: storedSettings.stopBits ?? 1,
+                    parity: storedSettings.parity ?? 'none',
+                    flowControl: storedSettings.flowControl ?? 'none',
                 });
 
+                await port.setSignals({
+                    dataTerminalReady: storedSettings.dtr ?? false,
+                    requestToSend: storedSettings.rts ?? false
+                });
+
+                updateRtsDtrDisplay(rtsValue, dtrValue);
+
                 addSystemMessage("<system message> - Port opened");
+                addSystemMessage(`<system message> - Connected: ${baudRate} baud | ` +
+                                `${storedSettings.dataBits ?? 8} dataBits | ` +
+                                `${storedSettings.stopBits ?? 1} stopBits | ` +
+                                `${storedSettings.parity ?? 'none'} parity | ` +
+                                `${storedSettings.flowControl ?? 'none'} flow | ` +
+                                `RTS: ${storedSettings.rts ? 'on' : 'off'} | ` +
+                                `DTR: ${storedSettings.dtr ? 'on' : 'off'}`);
+
+
 
                 keepReading = true;
                 autoScrollCheckbox.checked = true;

@@ -88,6 +88,15 @@
                         <option value="hex">Hex</option>
                         <option value="json">JSON</option>
                     </select>
+                    <div class="signal-status">
+                        <span id="rtsStatus" class="signal-indicator" title="Change in Settings">
+                            RTS: <span class="circle"></span> <span>off</span>
+                        </span>
+                        <span id="dtrStatus" class="signal-indicator" title="Change in Settings">
+                            DTR: <span class="circle"></span> <span>off</span>
+                        </span>
+                    </div>
+                    
                 </div>
             </div>
 
@@ -163,6 +172,45 @@
                     <option value="921600">921600</option>
                 </select>
             </div>
+            <!-- SERIAL PORT SETTINGS -->
+            <div id="settings-content">
+                <div class="serial-setting-row">
+                    <label class="serial-label">Data Bits:</label>
+                    <label><input type="radio" name="dataBits" value="7"> 7</label>
+                    <label><input type="radio" name="dataBits" value="8" checked> 8</label>
+                </div>
+            
+                <div class="serial-setting-row">
+                    <label class="serial-label">Stop Bits:</label>
+                    <label><input type="radio" name="stopBits" value="1" checked> 1</label>
+                    <label><input type="radio" name="stopBits" value="2"> 2</label>
+                </div>
+            
+                <div class="serial-setting-row">
+                    <label class="serial-label">Parity:</label>
+                    <label><input type="radio" name="parity" value="none" checked> None</label>
+                    <label><input type="radio" name="parity" value="even"> Even</label>
+                    <label><input type="radio" name="parity" value="odd"> Odd</label>
+                </div>
+            
+                <div class="serial-setting-row">
+                    <label class="serial-label">Flow Control:</label>
+                    <label><input type="radio" name="flowControl" value="none" checked> None</label>
+                    <label><input type="radio" name="flowControl" value="hardware"> Hardware</label>
+                </div>
+            </div>
+            <div id="settings-content">
+                <div class="serial-setting-row">
+                    <label class="serial-label">RTS:</label>
+                    <label><input type="checkbox" id="modalRTS"> Enable</label>
+                </div>
+                
+                <div class="serial-setting-row">
+                    <label class="serial-label">DTR:</label>
+                    <label><input type="checkbox" id="modalDTR"> Enable</label>
+                </div>
+            </div>
+
             <!-- LINE ENDING OPCIJA -->
             <div id="settings-content">
                 <label for="modalLineEnding">Default Line Ending:</label>
@@ -281,11 +329,14 @@
             <span id="closeFeaturesModal" class="close-button">&times;</span>
             <h3>Application Features & Notes</h3>
             <ul style="line-height: 1.6em;">
+                <li><strong>Web Serial API:</strong> Direct browser access to serial ports</li>
                 <li><strong>Auto Scroll:</strong> Works only while the buffer is not full (under Max Lines). After that, scroll is always forced.</li>
                 <li><strong>Copy / Save:</strong> Only the most recent <strong>Max Lines</strong> will be copied or saved. Older data is removed from memory.</li>
+                <li><strong>RTS/DTR Control:</strong> User-configurable signals with status indicators</li>
                 <li><strong>Pause Output:</strong> Pauses live data display. Incoming data is ignored during pause.</li>
                 <li><strong>Timestamp:</strong> Adds real-time timestamp (12h or 24h) to each line if enabled.</li>
                 <li><strong>Display Format:</strong> Switch between Normal / Hex / JSON views for incoming data.</li>
+                <li><strong>Search and Highlight:</strong> Inline search with results count</li>
                 <li><strong>Auto-Clear:</strong> When active and connected, clears the terminal after selected time interval.</li>
                 <li><strong>Dark/Light Theme:</strong> Switch between themes using the 🌙/☀️ icon. Preference is remembered.</li>
                 <li><strong>Buffer Limit:</strong> Configurable in Settings. Determines how many recent lines are stored (min 100).</li>
