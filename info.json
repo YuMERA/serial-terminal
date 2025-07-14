@@ -1,5 +1,15 @@
 [
   {
+    "title": "Web Serial API Support Notice",
+    "timestamp": "2025-07-13 18:00",
+    "description": "Improved visual notification for unsupported browsers. Overlay appears only when Web Serial API is unavailable."
+  },
+  {
+    "title": "AutoClear Behavior Fixed",
+    "timestamp": "2025-07-13 17:45",
+    "description": "AutoClear now updates immediately when changed via settings, even during active connection."
+  },
+  {
     "title": "Export Button for CSV/JSON Output",
     "timestamp": "2025-07-12 20:30",
     "description": "A new Export button allows users to save the terminal buffer in either CSV or JSON format. The export respects the timestamp setting and prompts the user for format selection."
