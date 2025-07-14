@@ -178,7 +178,6 @@ select:focus {
     padding: 15px;
     border: 1px solid var(--border-color);
     border-radius: 8px;
-    /*background-color: #f9f9f9;*/
     background-color: var(--set-conntent-bg);
 }
 
@@ -521,7 +520,7 @@ select:focus {
 /* Media Query za ekrane širine do 650px (manji ekrani, telefoni) */
 @media (max-width: 700px) {
     .container {
-        padding: 10px 20px;
+        padding: 10px 10px;
         margin: 10px;
     }
 
@@ -1119,4 +1118,11 @@ select:focus {
 
 .signal-indicator.off .circle {
     background-color: #dc3545; /* crvena */
+}
+
+.full-width {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 6px;
+    box-sizing: border-box;
 }

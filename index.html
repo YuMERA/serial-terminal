@@ -9,6 +9,16 @@
     <link rel="icon" href="favicon.ico">
 </head>
 <body>
+    
+    <!-- ⚠ Obaveštenje za nepodržane browsere -->
+    <div id="unsupportedNotice" style="display: none; position: fixed; inset: 0; background: #111; color: white; font-size: 1.2em; display: flex; align-items: center; justify-content: center; text-align: center; z-index: 9999; padding: 20px;">
+        <div>
+            <strong>Your browser does not support Web Serial API.</strong><br><br>
+            Please use a compatible browser like <strong>Chrome</strong>, <strong>Edge</strong> or <strong>Opera</strong>.<br><br>
+            This application cannot function without Web Serial support.
+        </div>
+    </div>
+
     <div class="container">
         <div style="display: flex; align-items: center; justify-content: space-between;">
             <div class="menu-container">
@@ -349,6 +359,25 @@
             
         </div>
     </div>
+
+    <!-- Modal za Export u .json ili .csv-->
+    <div id="exportModal" class="modal">
+        <div class="modal-content">
+        <span id="closeExportModal" class="close-button">&times;</span>
+        <h3>Export Terminal Output</h3>
+    
+        <label for="exportFileName">File name:</label>
+        <input type="text" id="exportFileName" class="full-width" />
+    
+        <label for="exportFormat">Format:</label>
+        <select id="exportFormat" class="full-width">
+            <option value="csv">CSV (.csv)</option>
+            <option value="json">JSON (.json)</option>
+        </select>
+    
+        <button id="confirmExportButton" class="bottom-export-button">Save</button>
+        </div>
+      </div>      
 
     <script src="script.js" defer></script>
 </body>

@@ -4,6 +4,16 @@
 * https://mera-system.com
 */
 document.addEventListener('DOMContentLoaded', () => {
+
+    if (!('serial' in navigator)) {
+        const unsupportedNotice = document.getElementById('unsupportedNotice');
+        if (unsupportedNotice) {
+            unsupportedNotice.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        return; // prekini dalje izvršavanje aplikacije
+    }        
+
     const connectDisconnectButton = document.getElementById('connectDisconnectButton');
     const baudRateSelect = document.getElementById('baudRate');
     const receivedDataOutput = document.getElementById('receivedDataOutput');
@@ -1110,16 +1120,47 @@ document.addEventListener('DOMContentLoaded', () => {
         return `<div class="log-line">${tsSpan}${content}</div>`;
     }
     
-    document.getElementById('exportOutputButton').addEventListener('click', () => {
-        const format = prompt("Export format: type 'csv' or 'json'", "csv");
-        if (format === 'csv' || format === 'json') {
-            exportData(format);
-        } else if (format !== null) {
-            alert("Unsupported format.");
+    // EXPORT MODAL
+    const exportModal = document.getElementById('exportModal');
+    const exportButton = document.getElementById('exportOutputButton');
+    const closeExportModal = document.getElementById('closeExportModal');
+
+    exportButton.addEventListener('click', () => {
+        const useTimestamps = showTimestampCheckbox.checked;
+        const lines = useTimestamps ? rawLinesWithTimestamp : rawLines;
+    
+        if (lines.length === 0) {
+            alert("Nothing to export.");
+            return;
+        }
+    
+        const now = new Date().toISOString().replace(/[:.]/g, '-');
+        const defaultName = `serial_export_${now}`;
+        document.getElementById('exportFileName').value = defaultName;
+        document.getElementById('exportFormat').value = 'csv';
+        exportModal.style.display = 'block';
+    });
+    
+
+    closeExportModal.addEventListener('click', () => {
+        exportModal.style.display = 'none';
+    });
+
+    window.addEventListener('click', (e) => {
+        if (e.target === exportModal) {
+            exportModal.style.display = 'none';
         }
     });
 
-    function exportData(format = 'csv') {
+    document.getElementById('confirmExportButton').addEventListener('click', () => {
+        const filename = document.getElementById('exportFileName').value.trim();
+        const format = document.getElementById('exportFormat').value;
+    
+        exportData(format, filename);
+        exportModal.style.display = 'none';
+    }); 
+
+    function exportData(format = 'csv', filename = 'export') {
         const useTimestamps = showTimestampCheckbox.checked;
         const lines = useTimestamps ? rawLinesWithTimestamp : rawLines;
     
@@ -1149,9 +1190,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const blob = new Blob([content], { type: mime });
         const a = document.createElement('a');
         a.href = URL.createObjectURL(blob);
-        a.download = `serial_export_${new Date().toISOString().replace(/[:.]/g, '-')}.${extension}`;
+        a.download = `${filename}.${extension}`;
         a.click();
     }
+    
     
 
     applyThemeFromStorage(); // ✅ Pozovi odmah da se tema učita
