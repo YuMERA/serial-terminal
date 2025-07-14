@@ -27,4 +27,4 @@
 
 ## Older Versions
 
-See previous releases in [GitHub Releases](https://github.com/your-username/your-repo/releases)
+See previous releases in [GitHub Releases](https://github.com/YuMERA/serial-terminal/releases)
