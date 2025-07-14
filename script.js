@@ -6,12 +6,13 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     if (!('serial' in navigator)) {
-        const unsupportedNotice = document.getElementById('unsupportedNotice');
-        if (unsupportedNotice) {
+        const unsupportedNotice = document.getElementById('unsupportedNotice').display;
+        if (unsupportedNotice ) {
             unsupportedNotice.style.display = 'flex';
             document.body.style.overflow = 'hidden';
         }
-        return; // prekini dalje izvršavanje aplikacije
+        return;
+
     }        
 
     const connectDisconnectButton = document.getElementById('connectDisconnectButton');
