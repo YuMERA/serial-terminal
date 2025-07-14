@@ -306,6 +306,7 @@ document.addEventListener('DOMContentLoaded', () => {
         saveOutputButton.title = `Only the most recent ${maxLinesToDisplay} lines will be saved. Older lines are discarded from memory.`;
         
         settingsModal.style.display = 'none';
+        setupAutoClear(newSettings.autoClearMinutes);
         updateRtsDtrDisplay(newSettings.rts, newSettings.dtr);
     }
     
@@ -332,7 +333,7 @@ document.addEventListener('DOMContentLoaded', () => {
         baudRateSelect.value = DEFAULT_SETTINGS.baudRate.toString();
         showTimestampCheckbox.checked = DEFAULT_SETTINGS.showTimestamp;
         lineEndingSelect.value = DEFAULT_SETTINGS.lineEnding;
-
+        setupAutoClear(newSettings.autoClearMinutes);
         // Osveži prikaz ako treba
         updateOutputDisplay();
         updateAutoScrollAvailability();
@@ -635,8 +636,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const storedSettings = JSON.parse(localStorage.getItem('serialSettings')) || {};
                 const baudRate = storedSettings.baudRate || parseInt(baudRateSelect.value);
 
-                const rtsValue = storedSettings.rts ?? true;
-                const dtrValue = storedSettings.dtr ?? true;
+                const rtsValue = storedSettings.rts ?? DEFAULT_SETTINGS.rts;
+                const dtrValue = storedSettings.dtr ?? DEFAULT_SETTINGS.dtr;
                 await port.open({
                     baudRate,
                     dataBits: storedSettings.dataBits ?? 8,
@@ -646,8 +647,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
 
                 await port.setSignals({
-                    dataTerminalReady: storedSettings.dtr ?? false,
-                    requestToSend: storedSettings.rts ?? false
+                    dataTerminalReady: dtrValue,
+                    requestToSend: rtsValue
                 });
 
                 updateRtsDtrDisplay(rtsValue, dtrValue);
