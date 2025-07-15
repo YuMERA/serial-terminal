@@ -695,6 +695,8 @@ document.addEventListener('DOMContentLoaded', () => {
         receivedDataOutput.innerHTML = '';
         displayedLines = [];
         pendingLines = [];
+        rawLines = [];
+        rawLinesWithTimestamp = [];
         totalLinesReceived = 0;
         
         autoClearInterval = null;
