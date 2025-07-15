@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Provera da li browser podrzava Serial API
     if (!('serial' in navigator)) {
-        const unsupportedNotice = document.getElementById('unsupportedNotice').display;
+        const unsupportedNotice = document.getElementById('unsupportedNotice');
         if (unsupportedNotice ) {
             unsupportedNotice.style.display = 'flex';
             document.body.style.overflow = 'hidden';
