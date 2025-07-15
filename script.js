@@ -339,7 +339,7 @@ document.addEventListener('DOMContentLoaded', () => {
         baudRateSelect.value = DEFAULT_SETTINGS.baudRate.toString();
         showTimestampCheckbox.checked = DEFAULT_SETTINGS.showTimestamp;
         lineEndingSelect.value = DEFAULT_SETTINGS.lineEnding;
-        setupAutoClear(newSettings.autoClearMinutes);
+        setupAutoClear(DEFAULT_SETTINGS.autoClearMinutes);
         // Osveži prikaz ako treba
         updateOutputDisplay();
         updateAutoScrollAvailability();
