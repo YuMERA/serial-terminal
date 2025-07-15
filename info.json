@@ -1,5 +1,10 @@
 [
   {
+	"title": "Social Media Footer with GitHub",
+	"timestamp": "2025-07-13 18:20",
+	"description": "The application footer now includes official social media icons for Twitter, YouTube, X, Viber, WhatsApp, Telegram, TikTok, Pinterest, and GitHub. Each icon uses its official brand color and links to your profiles."
+  },
+  {
     "title": "Web Serial API Support Notice",
     "timestamp": "2025-07-13 18:00",
     "description": "Improved visual notification for unsupported browsers. Overlay appears only when Web Serial API is unavailable."
