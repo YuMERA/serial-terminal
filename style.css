@@ -53,6 +53,8 @@ body {
     background-color: var(--bg-color);
     margin: 20px;
     box-sizing: border-box; /* Dodato za bolje responsive ponašanje */
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .container {
