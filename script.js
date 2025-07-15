@@ -5,6 +5,7 @@
 */
 document.addEventListener('DOMContentLoaded', () => {
 
+    // Provera da li browser podrzava Serial API
     if (!('serial' in navigator)) {
         const unsupportedNotice = document.getElementById('unsupportedNotice').display;
         if (unsupportedNotice ) {
@@ -12,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.style.overflow = 'hidden';
         }
         return;
-
     }        
 
     const connectDisconnectButton = document.getElementById('connectDisconnectButton');
@@ -54,7 +54,6 @@ document.addEventListener('DOMContentLoaded', () => {
         updateOutputDisplay();
         updateSearchInputAvailability();
     });
-    
 
     // Inicijalna vrednost
     let maxLinesToDisplay = parseInt(modalMaxLines.value) || 2000;
@@ -97,7 +96,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (dtrText) dtrText.textContent = dtrValue ? 'on' : 'off';
     }
     
-    
     searchInput.addEventListener('input', () => {
         clearSearchButton.style.display = searchInput.value.trim().length > 0 ? 'inline' : 'none';
         filterSearchResults();
@@ -124,7 +122,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (clearSearchButton) clearSearchButton.style.display = 'none';
     }
     
-
     searchIcon.addEventListener('click', performSearch);
 
     function performSearch() {
@@ -285,7 +282,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const rtsCheckbox = document.getElementById('modalRTS');
         const dtrCheckbox = document.getElementById('modalDTR');
 
-    
         const newSettings = {
             maxLines: newMax,
             baudRate: baudSelect ? parseInt(baudSelect.value) : 115200,
@@ -321,7 +317,6 @@ document.addEventListener('DOMContentLoaded', () => {
         updateRtsDtrDisplay(newSettings.rts, newSettings.dtr);
     }
     
-
     // Resetovanje na podrazumevana podešavanja
     function resetToDefaults() {
         localStorage.removeItem('serialSettings');
@@ -398,7 +393,6 @@ document.addEventListener('DOMContentLoaded', () => {
             receivedDataOutput.scrollTop = previousScrollTop;
         }
 
-    
         updateAutoScrollAvailability();
     }
     
@@ -433,9 +427,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
-    
-       
-
     function addSystemMessage(message, isError = false, isHtml = false) {
         rawLines.push(message); // Sačuvaj sirovi tekst
 
@@ -531,7 +522,6 @@ document.addEventListener('DOMContentLoaded', () => {
         applyMaxLinesLimit();
         updateOutputDisplay();
     }
-
 
     async function readSerialPort() {
         const decoder = new TextDecoderStream();
@@ -674,8 +664,6 @@ document.addEventListener('DOMContentLoaded', () => {
                                 `RTS: ${storedSettings.rts ? 'on' : 'off'} | ` +
                                 `DTR: ${storedSettings.dtr ? 'on' : 'off'}`);
 
-
-
                 keepReading = true;
                 autoScrollCheckbox.checked = true;
                 scrollLocked = false;
@@ -738,8 +726,6 @@ document.addEventListener('DOMContentLoaded', () => {
         a.remove();
     });
 
-    
-
     copyOutputButton.addEventListener('click', async () => {
         const useTimestamps = showTimestampCheckbox.checked;
         const linesToCopy = useTimestamps ? rawLinesWithTimestamp : rawLines;
@@ -771,8 +757,6 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Clipboard copy failed.');
         }
     });
-
-    
 
     sendButton.addEventListener('click', sendSerialData);
     sendInput.addEventListener('keydown', (e) => {
@@ -1200,11 +1184,8 @@ document.addEventListener('DOMContentLoaded', () => {
         a.download = `${filename}.${extension}`;
         a.click();
     }
-    
-    
 
     applyThemeFromStorage(); // ✅ Pozovi odmah da se tema učita
-
 
     // Init
     connectDisconnectButton.disabled = false;

@@ -506,11 +506,51 @@ select:focus {
 
 /* Stil za copyright informaciju (CENTRIANO) */
 .copyright {
-    /*margin-top: 25px;*/
-    text-align: center; /* CENTRIRANO */
+    display: flex;
+    flex-wrap: wrap; /* za mobilne */
+    justify-content: space-between;
+    align-items: center;
+    /*padding: 10px 20px;*/
     font-size: 0.8em;
     color: #777;
+
+    /*border-top: 1px solid #ccc;*/
 }
+
+.copyright .left-text {
+    text-align: left;
+    
+}
+
+.copyright .social-icons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    /*border: 1px solid var(--border-color);*/
+    border-radius: 4px;
+    background-color: var(--input-bg);
+    padding: 8px 10px;
+}
+
+.copyright .social-icons a {
+    text-decoration: none;
+    font-size: 1.3em;
+    transition: transform 0.2s;
+}
+
+.copyright .social-icons a:hover {
+    transform: scale(1.2);
+}
+
+/* 🎯 Boje po brendu */
+.social-icons .twitter    { color: #1DA1F2; }     /* Twitter/X */
+.social-icons .youtube    { color: #FF0000; }
+.social-icons .viber      { color: #665CAC; }
+.social-icons .whatsapp   { color: #25D366; }
+.social-icons .telegram   { color: #0088cc; }
+.social-icons .tiktok     { color: #010101; }     /* TikTok crno-belo */
+.social-icons .pinterest  { color: #E60023; }
+.social-icons .github     { color: #171515;    } /* GitHub siva, možeš i belo ako koristiš tamnu temu */
 
 /* ======================================= */
 /* RESPONSIVE DIZAJN (za mobilne uređaje) */
@@ -520,7 +560,7 @@ select:focus {
 @media (max-width: 700px) {
     .container {
         padding: 10px 10px;
-        margin: 10px;
+        /*margin: 10px;*/
     }
 
     h1 {
@@ -662,7 +702,7 @@ select:focus {
 }
 
 /* Media Query za ekrane širine do 400px (vrlo mali telefoni) */
-@media (max-width: 420px) {
+@media (max-width: 450px) {
     h1 {
         font-size: 1.4em;
     }
