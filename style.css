@@ -521,7 +521,7 @@ select:focus {
 
 .copyright .left-text {
     text-align: left;
-    
+    margin-left: 10px;
 }
 
 .copyright .social-icons {
