@@ -357,7 +357,6 @@ select:focus {
     flex-wrap: wrap;
 }
 .output-action-buttons button {
-    
     padding: 8px 15px;
     font-size: 0.9em;
     font-weight: bold;
@@ -791,6 +790,28 @@ select:focus {
     box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
 }
 
+#exportModal .modal-content{
+    margin: 15% auto;
+}
+#exportModal #settings-content{
+  margin-bottom: 20px;
+}
+#exportModal .modal-content{
+    width: 500px;
+    max-height: 85vh;
+}
+
+#exportModal button{
+    width: 140px;
+    margin: 20px 18px 10px;
+}
+#exportModal select{
+    width: 200px;
+    margin-bottom: 10px;
+    padding: 6px;
+    box-sizing: border-box;
+}
+
 .modal-content label {
     color: var(--text-color);
     display: flex;
@@ -814,6 +835,11 @@ select:focus {
     margin-right: 10px;
     transform: scale(1.2);
     cursor: pointer;
+}
+.modal-content input[type="text"]:focus{
+    outline: none;
+    border-color: var(--badge-lines-text);
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
 }
 
 .modal-content button {
@@ -1125,4 +1151,9 @@ select:focus {
     margin-bottom: 10px;
     padding: 6px;
     box-sizing: border-box;
+}
+
+.sent-command {
+    color:  #1eab1e; /* svetlo zelena */
+    font-weight: bold;
 }

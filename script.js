@@ -436,7 +436,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
        
 
-    function addSystemMessage(message, isError = false) {
+    function addSystemMessage(message, isError = false, isHtml = false) {
         rawLines.push(message); // Sačuvaj sirovi tekst
 
         const timestamp = new Date().toLocaleTimeString('sr-RS', { hour12: use12hFormat });
@@ -456,7 +456,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const content = message.slice(17);
             msg = `<span class="system-message">&lt;system message&gt;</span> ${escapeHtml(content)}`;
         } else {
-            msg = escapeHtml(message);
+            //msg = escapeHtml(message);
+            msg = isHtml ? message : escapeHtml(message);
         }
 
         const fullLine = `${tsSpan}${msg}`;
@@ -795,7 +796,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 const encoder = new TextEncoder();
                 await writer.write(encoder.encode(dataToSend));
                 writer.releaseLock();
-                addSystemMessage(`[Sent]: ${sendInput.value} [${lineEnding.toUpperCase()}]`);
+
+                //addSystemMessage(`[Sent]: ${sendInput.value} [${lineEnding.toUpperCase()}]`);
+                const sentText = escapeHtml(sendInput.value);
+                const formattedSent = `<span class="sent-command">[Sent]: ${sentText} [${lineEnding.toUpperCase()}]</span>`;
+                addSystemMessage(formattedSent, false, true);
+
                 sendInput.value = '';
             } catch (err) {
                 addSystemMessage(`<system message> - Send error: ${err.message}`, true);
@@ -1138,7 +1144,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const now = new Date().toISOString().replace(/[:.]/g, '-');
         const defaultName = `serial_export_${now}`;
         document.getElementById('exportFileName').value = defaultName;
-        document.getElementById('exportFormat').value = 'csv';
+        document.getElementById('exportFormat').value = 'json';
         exportModal.style.display = 'block';
     });
     
