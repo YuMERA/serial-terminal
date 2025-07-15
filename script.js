@@ -1,5 +1,5 @@
 /*! 
-* Web Serial Terminal v1.0
+* Web Serial Terminal v1.3.3
 * (c) 2025 Mera System - All rights reserved
 * https://mera-system.com
 */
@@ -185,8 +185,8 @@ document.addEventListener('DOMContentLoaded', () => {
         stopBits: 1,
         parity: 'none',
         flowControl: 'none',
-        rts: true,
-        dtr: true,
+        rts: false,
+        dtr: false,
         use12h: false,
         autoClearMinutes: 0
     };
