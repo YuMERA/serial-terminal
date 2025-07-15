@@ -28,3 +28,32 @@
 ## Older Versions
 
 See previous releases in [GitHub Releases](https://github.com/YuMERA/serial-terminal/releases)
+
+## [v1.3.3] - 2025-07-13
+
+### ✨ New Features
+
+- **Social Media Footer**
+  - Added official social media icons to the footer (Twitter, YouTube, X, Viber, WhatsApp, Telegram, TikTok, Pinterest, GitHub)
+  - Each icon uses its original brand color for instant recognition
+  - Hover effect added for visual feedback
+  - GitHub icon links to the public repository
+
+### 💄 UI Improvements
+
+- Footer layout updated:
+  - Developer credit now left-aligned
+  - Social icons now right-aligned
+  - Responsive wrapping behavior for small screens
+
+### 🔧 Internal
+
+- Cleaned up older `.copyright` styles
+- Ensured accessibility with `title` attributes for all icons
+
+---
+
+## Previous Versions
+
+See full history in [Releases »](https://github.com/YuMERA/serial-terminal/releases)
+
