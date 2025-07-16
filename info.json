@@ -1,8 +1,8 @@
 [
   {
-	"title": "Social Media Footer with GitHub",
-	"timestamp": "2025-07-13 18:20",
-	"description": "The application footer now includes official social media icons for Twitter, YouTube, X, Viber, WhatsApp, Telegram, TikTok, Pinterest, and GitHub. Each icon uses its official brand color and links to your profiles."
+    "title": "Social Media Footer with GitHub",
+    "timestamp": "2025-07-13 18:20",
+    "description": "The application footer now includes official social media icons for Twitter, YouTube, X, Viber, WhatsApp, Telegram, TikTok, Pinterest, and GitHub. Each icon uses its official brand color and links to your profiles."
   },
   {
     "title": "Web Serial API Support Notice",
@@ -24,7 +24,6 @@
     "timestamp": "2025-07-12 20:10",
     "description": "The Export button is styled in purple to distinguish it from existing action buttons. It supports both light and dark themes with consistent appearance."
   },
-  
   {
     "title": "RTS/DTR Status Indicators",
     "timestamp": "2025-07-12 17:30",

@@ -156,6 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const tooltip = atLimit ? AUTO_SCROLL_DISABLED_TOOLTIP : AUTO_SCROLL_ENABLED_TOOLTIP;
         autoScrollCheckbox.title = tooltip;
+
         if (autoScrollLabel) {
             autoScrollLabel.title = tooltip;
         }
@@ -245,17 +246,10 @@ document.addEventListener('DOMContentLoaded', () => {
             setupAutoClear(settings.autoClearMinutes);
         }
 
-        // Data Bits
-        document.querySelector(`input[name="dataBits"][value="${settings.dataBits ?? DEFAULT_SETTINGS.dataBits}"]`).checked = true;
-
-        // Stop Bits
-        document.querySelector(`input[name="stopBits"][value="${settings.stopBits ?? DEFAULT_SETTINGS.stopBits}"]`).checked = true;
-
-        // Parity
-        document.querySelector(`input[name="parity"][value="${settings.parity ?? DEFAULT_SETTINGS.parity}"]`).checked = true;
-
-        // Flow Control
-        document.querySelector(`input[name="flowControl"][value="${settings.flowControl ?? DEFAULT_SETTINGS.flowControl}"]`).checked = true;
+        document.querySelector(`input[name="dataBits"][value="${settings.dataBits ?? DEFAULT_SETTINGS.dataBits}"]`).checked = true; // Data Bits
+        document.querySelector(`input[name="stopBits"][value="${settings.stopBits ?? DEFAULT_SETTINGS.stopBits}"]`).checked = true; // Stop Bits      
+        document.querySelector(`input[name="parity"][value="${settings.parity ?? DEFAULT_SETTINGS.parity}"]`).checked = true; // Parity       
+        document.querySelector(`input[name="flowControl"][value="${settings.flowControl ?? DEFAULT_SETTINGS.flowControl}"]`).checked = true; // Flow Control
 
         const rtsCheckbox = document.getElementById('modalRTS');
         const dtrCheckbox = document.getElementById('modalDTR');
@@ -340,7 +334,6 @@ document.addEventListener('DOMContentLoaded', () => {
         showTimestampCheckbox.checked = DEFAULT_SETTINGS.showTimestamp;
         lineEndingSelect.value = DEFAULT_SETTINGS.lineEnding;
         setupAutoClear(DEFAULT_SETTINGS.autoClearMinutes);
-        // Osveži prikaz ako treba
         updateOutputDisplay();
         updateAutoScrollAvailability();
         updateRtsDtrDisplay(DEFAULT_SETTINGS.rts, DEFAULT_SETTINGS.dtr);
@@ -447,7 +440,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const content = message.slice(17);
             msg = `<span class="system-message">&lt;system message&gt;</span> ${escapeHtml(content)}`;
         } else {
-            //msg = escapeHtml(message);
             msg = isHtml ? message : escapeHtml(message);
         }
 
@@ -464,6 +456,8 @@ document.addEventListener('DOMContentLoaded', () => {
     
         switch (format) {
             case 'hex':
+                /* Ovo ako zelim da mi se ispred hex broja ispisuje "0x"
+                   return Array.from(line).map(c => '0x' + c.charCodeAt(0).toString(16).padStart(2, '0')).join(' ');*/
                 return Array.from(line).map(c => c.charCodeAt(0).toString(16).padStart(2, '0')).join(' ');
             case 'json':
                 try {
@@ -477,26 +471,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 return line;
         }
     }
-
-    /// Ovo ako zelim da mi se ispred hex broja ispisuje "0x"
-    /*function formatLine(line) {
-        switch (currentDisplayFormat) {
-            case 'hex':
-                return Array.from(line)
-                    .map(c => '0x' + c.charCodeAt(0).toString(16).padStart(2, '0'))
-                    .join(' ');
-            case 'json':
-                try {
-                    const obj = JSON.parse(line);
-                    return JSON.stringify(obj, null, 2);
-                } catch (e) {
-                    return line; // fallback ako nije validan JSON
-                }
-            case 'normal':
-            default:
-                return line;
-        }
-    }*/
 
     function updateOutput() {
         if (pendingLines.length === 0) return;
@@ -633,7 +607,6 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             try {
                 clearBuffer();
-
                 port = await navigator.serial.requestPort();
                 const storedSettings = JSON.parse(localStorage.getItem('serialSettings')) || {};
                 const baudRate = storedSettings.baudRate || parseInt(baudRateSelect.value);
