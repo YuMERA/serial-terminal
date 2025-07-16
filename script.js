@@ -493,6 +493,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         pendingLines = [];
+
+          // 🚨 Emergency AutoClear pre nego što browser postane spor
+        const emergencyLimit = 120;
+        if (displayedLines.length > emergencyLimit) {
+
+            // Ručno praznimo sve strukture
+            receivedDataOutput.innerHTML = '';
+            pendingLines = [];
+            displayedLines = [];
+            rawLines = [];
+            rawLinesWithTimestamp = [];
+            totalLinesReceived = 0;
+
+            addSystemMessage(`<system message> - Emergency Auto-Clear activated at ${emergencyLimit} lines.`);
+        }
+
         applyMaxLinesLimit();
         updateOutputDisplay();
     }
