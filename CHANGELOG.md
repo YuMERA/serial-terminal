@@ -25,10 +25,6 @@
 
 ---
 
-## Older Versions
-
-See previous releases in [GitHub Releases](https://github.com/YuMERA/serial-terminal/releases)
-
 ## [v1.3.3] - 2025-07-13
 
 ### ✨ New Features
@@ -52,6 +48,19 @@ See previous releases in [GitHub Releases](https://github.com/YuMERA/serial-term
 - Ensured accessibility with `title` attributes for all icons
 
 ---
+
+## [v1.3.4] – 2025-07-13
+
+### Added
+- Emergency Auto-Clear system: automatically clears terminal output if buffer exceeds 12,000 lines
+- Display of system message when emergency clear is triggered
+
+### Improved
+- Prevented console error related to message rendering after forced buffer reset
+
+### Fixed
+- Consistency in Copy, Save, and Export operations after auto-clear event
+
 
 ## Previous Versions
 
