@@ -658,6 +658,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 readSerialPort();
 
             } catch (e) {
+                if (e.message.includes('No port selected')) {return;}
                 addSystemMessage(`<system message> - Error connecting: ${e.message}`, true);
                 port = null;
             }
