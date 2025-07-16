@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Inicijalna vrednost
-    let maxLinesToDisplay = parseInt(modalMaxLines.value) || 2000;
+    let maxLinesToDisplay = parseInt(modalMaxLines.value) || 10000;
     let scrollLocked = !autoScrollCheckbox.checked;
     
     autoScrollCheckbox.addEventListener('change', () => {
@@ -178,7 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Deo koji obradjuje options setovanje i default vrednosti
     const DEFAULT_SETTINGS = {
-        maxLines: 2000,
+        maxLines: 10000,
         showTimestamp: false,
         baudRate: 115200,
         lineEnding: 'lf',
@@ -495,7 +495,7 @@ document.addEventListener('DOMContentLoaded', () => {
         pendingLines = [];
 
           // 🚨 Emergency AutoClear pre nego što browser postane spor
-        const emergencyLimit = 120;
+        const emergencyLimit = 12000;
         if (displayedLines.length > emergencyLimit) {
 
             // Ručno praznimo sve strukture
