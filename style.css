@@ -534,6 +534,8 @@ select:focus {
 .copyright .left-text {
     text-align: left;
     margin-left: 10px;
+    font-style: italic;
+
 }
 
 .copyright .social-icons {
@@ -1180,6 +1182,8 @@ select:focus {
     align-items: center;
     gap: 5px;
     font-size: 0.75em;
+    font-style: italic;
+    font-weight: bold;
     cursor: default;
     white-space: nowrap;
 }
@@ -1209,5 +1213,13 @@ select:focus {
 
 .sent-command {
     color:  #1eab1e; /* svetlo zelena */
+    font-weight: bold;
+}
+
+.version-app{
+    font-size: 0.75em;
+    color: var(--info-entry-description);
+    margin-right: 10px;
+    font-style: italic;
     font-weight: bold;
 }
