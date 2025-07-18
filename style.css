@@ -860,6 +860,7 @@ select:focus {
 #exportModal button{
     width: 140px;
     margin: 20px 18px 10px;
+    font-size: 1em;
 }
 #exportModal select{
     width: 200px;

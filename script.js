@@ -495,16 +495,17 @@ document.addEventListener('DOMContentLoaded', () => {
         pendingLines = [];
 
           // 🚨 Emergency AutoClear pre nego što browser postane spor
-        const emergencyLimit = 12000;
+        const emergencyLimit = 100;
         if (displayedLines.length > emergencyLimit) {
 
-            // Ručno praznimo sve strukture
+            /*// Ručno praznimo sve strukture
             receivedDataOutput.innerHTML = '';
             pendingLines = [];
             displayedLines = [];
             rawLines = [];
             rawLinesWithTimestamp = [];
-            totalLinesReceived = 0;
+            totalLinesReceived = 0;*/
+            clearBuffer();
 
             addSystemMessage(`<system message> - Emergency Auto-Clear activated at ${emergencyLimit} lines.`);
         }
@@ -552,6 +553,8 @@ document.addEventListener('DOMContentLoaded', () => {
         pendingLines = [];
         displayedLines = [];
         totalLinesReceived = 0;
+        rawLines = [];
+        rawLinesWithTimestamp = [];
         
         const storedSettings = JSON.parse(localStorage.getItem('serialSettings')) || {};
         const autoClearMin = storedSettings.autoClearMinutes || 0;
