@@ -539,7 +539,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         } catch (e) {
-            addSystemMessage(`<system message> - Error reading stream: ${e.message}`, true);
+            addSystemMessage(`<system message> - Error reading stream: ${e.message}`);
             portDisconnect();
         } finally {
             try { reader.releaseLock(); } catch (e) {}

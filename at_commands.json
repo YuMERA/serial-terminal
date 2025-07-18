@@ -8,6 +8,22 @@
       "description": "Check Version Information."
     },
     {
+      "cmd": "AT+GMI",
+      "description": "Determine the identity of the modem manufacturer."
+    },
+    {
+      "cmd": "AT+GMM",
+      "description": "Get the modem model."
+    },
+    {
+      "cmd": "AT+CGMR",
+      "description": "Get firmware version."
+    },
+    {
+      "cmd": "AT+CGSN",
+      "description": "Get the International Mobile station Equipment Identity (IMEI)."
+    },
+    {
       "cmd": "AT+RST",
       "description": "Restart the module."
     },
