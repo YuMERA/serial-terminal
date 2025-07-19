@@ -495,7 +495,7 @@ document.addEventListener('DOMContentLoaded', () => {
         pendingLines = [];
 
           // 🚨 Emergency AutoClear pre nego što browser postane spor
-        const emergencyLimit = 100;
+        const emergencyLimit = 12000;
         if (displayedLines.length > emergencyLimit) {
 
             /*// Ručno praznimo sve strukture
