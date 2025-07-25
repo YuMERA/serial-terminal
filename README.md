@@ -86,7 +86,7 @@ v1.3.5
 - ├── favicon.ico
 - └── README.md
 
---
+---
 
 ## 🔒 License
 © 2025 me[R]a — All rights reserved.
