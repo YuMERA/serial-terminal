@@ -61,6 +61,23 @@
 ### Fixed
 - Consistency in Copy, Save, and Export operations after auto-clear event
 
+---
+
+## [v1.3.5] - 2025-07-24
+
+### ✅ Added
+- **Hardware Reset Button**  
+  A new Reset button has been added to the main interface. It uses RTS/DTR toggling to perform a hardware reset on connected devices (e.g., ESP32) without disconnecting.  
+  Displays `<system message>` logs to confirm reset actions.
+
+### 🔄 Changed
+- **Baud Rate Priority**  
+  The baud rate selected on the main interface now takes priority over the Settings modal value, ensuring quick and easy changes without reopening Settings.
+
+### 🛠 Fixed
+- Improved reset reliability by introducing a safe signal sequence before reset.
+
+
 
 ## Previous Versions
 

@@ -35,11 +35,14 @@
                 
             </div>
             <h1 style="flex-grow: 1; text-align: center; margin: 15px;">Web Serial Terminal</h1>
-            <span class="version-app">v1.3.4</span>
+            <span id="appVersion" class="version-app"></span>
         </div>
 
         <div class="top-controls">
-            <button id="connectDisconnectButton" class="connect" title="Click to select and connect to a serial port.">Connect</button>
+            <div class="left-group">
+                <button id="connectDisconnectButton" class="connect" title="Click to select and connect to a serial port.">Connect</button>
+                <button id="resetDeviceButton" class="bottom-reset-button">Reset</button>            
+            </div>
 
             <div class="baud-rate-select">
                 <label for="baudRate">Baud Rate:</label>
@@ -296,7 +299,9 @@
                 <li>📤 Export or copy terminal output</li><br>
                 <li>💬 Useful for debugging ESP, Arduino, and other microcontrollers</li><br>
             </ul>
-            <p style="font-size: 0.9em; color: #777;">© 2025 me[R]a — All rights reserved. Redistribution prohibited without permission. Version 1.3.4</p>
+            <p style="font-size: 0.9em; color: #777;">© 2025 me[R]a — All rights reserved. Redistribution prohibited without permission. Version <span id="aboutVersion"></span> 
+            
+            </p>
         </div>
     </div>
 

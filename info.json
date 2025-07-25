@@ -1,5 +1,15 @@
 [ 
   {
+    "title": "Hardware Reset Feature",
+    "timestamp": "2025-07-25 12:40",
+    "description": "Added a Reset button to the main interface that sends a hardware reset sequence using RTS and DTR signal toggling, without requiring disconnect/reconnect. Displays confirmation system messages."
+  },
+  {
+    "title": "Baud Rate Priority Update",
+    "timestamp": "2025-07-24 12:45",
+    "description": "The baud rate selected in the main interface now always overrides the Settings modal value, ensuring instant changes without reopening Settings."
+  },  
+  {
     "title": "Emergency Auto-Clear Protection",
     "timestamp": "2025-07-15 22:45",
     "description": "Added a safety mechanism to automatically clear the terminal buffer if the number of lines exceeds 12,000. This prevents performance issues and browser slowdowns. A system message is displayed to inform the user."

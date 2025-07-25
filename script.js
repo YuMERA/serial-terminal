@@ -628,7 +628,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 clearBuffer();
                 port = await navigator.serial.requestPort();
                 const storedSettings = JSON.parse(localStorage.getItem('serialSettings')) || {};
-                const baudRate = storedSettings.baudRate || parseInt(baudRateSelect.value);
+                const baudRate = parseInt(baudRateSelect.value); // uvek uzmi iz glavnog select-a
+
 
                 const rtsValue = storedSettings.rts ?? DEFAULT_SETTINGS.rts;
                 const dtrValue = storedSettings.dtr ?? DEFAULT_SETTINGS.dtr;
@@ -1179,6 +1180,45 @@ document.addEventListener('DOMContentLoaded', () => {
         a.download = `${filename}.${extension}`;
         a.click();
     }
+
+    const resetDeviceButton = document.getElementById('resetDeviceButton');
+
+    // Reset button handler
+    resetDeviceButton.addEventListener('click', async () => {
+        if (!port) {
+            addSystemMessage('<system message> - Cannot reset: No active port connection.');
+            return;
+        }
+
+        try {
+            addSystemMessage('<system message> - Sending hardware reset sequence...');
+
+            // Osiguraj da ima promene stanja čak i na prvom kliku
+            await port.setSignals({ dataTerminalReady: true, requestToSend: true });
+            await new Promise(res => setTimeout(res, 100));
+
+            // Sada pravi reset
+            await port.setSignals({ dataTerminalReady: false, requestToSend: false });
+            await new Promise(res => setTimeout(res, 200));
+
+            await port.setSignals({ dataTerminalReady: true, requestToSend: true });
+
+            addSystemMessage('<system message> - Reset complete.');
+        } catch (err) {
+            addSystemMessage(`<system message> - Reset failed: ${err.message}`);
+        }
+    });
+
+    fetch('version.json')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('appVersion').textContent = data.version;
+            document.getElementById('aboutVersion').textContent = data.version + " last update " + data.update ;
+        })
+        .catch(() => {
+            document.getElementById('appVersion').textContent = 'v1.x.x'; // fallback
+            document.getElementById('aboutVersion').textContent = 'v1.x.x'; // fallback
+    });
 
     applyThemeFromStorage(); // ✅ Pozovi odmah da se tema učita
 

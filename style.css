@@ -150,6 +150,22 @@ h2 {
     transform: none;
 }
 
+.bottom-reset-button {
+    background-color: #ff9800;
+    color: var(--input-bg);
+    border: none;
+    padding: 8px 12px;
+    margin-left: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.bottom-reset-button:hover {
+    background-color: #e68900;
+    color: white;
+    transform: translateY(-1px);
+}
+
+
 /* Stil za Baud rate select box */
 .baud-rate-select {
     display: flex;
@@ -390,6 +406,7 @@ select:focus {
 .bottom-save-button:hover {
     background-color: #0056b3;
     color: white;
+    transform: translateY(-1px);
 }
 
 .bottom-copy-button {
@@ -399,6 +416,7 @@ select:focus {
 .bottom-copy-button:hover {
     background-color: #5a6268;
     color: white;
+    transform: translateY(-1px);
 }
 
 /* Postojeći stil za Clear dugme u donjem delu */
@@ -408,6 +426,7 @@ select:focus {
 }
 .bottom-clear-button:hover {
     background-color: #e0a800;
+    transform: translateY(-1px);
 }
 
 .bottom-export-button {
@@ -418,6 +437,7 @@ select:focus {
 .bottom-export-button:hover {
     background-color: #5936a2;
     color: white;
+    transform: translateY(-1px);
 }
 
 
@@ -596,6 +616,10 @@ select:focus {
     #connectDisconnectButton {
         width: 100%;
         box-sizing: border-box;
+    }
+    .left-group {
+        display: flex;
+        gap: 10px; /* razmak između Connect i Reset */
     }
 
     .baud-rate-select {
