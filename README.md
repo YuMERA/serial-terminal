@@ -19,6 +19,8 @@
 - [Installation](#-installation)
 - [Usage Guide](#-how-to-use)
 - [Changelog](#-changelog)
+- [License](#-license)
+- [Project Structure](#-structure)
 
 ---
 
@@ -44,13 +46,50 @@
 ### Dark Mode  
 ![Dark Mode Screenshot](./screenshots/dark-mode.png)
 
-
 ---
 
 ## 🛠 Requirements
 - Browser: **Chrome**, **Edge**, or any with Web Serial API
 - HTTPS connection (required by Web Serial)
 - USB device supporting serial communication (ESP32, Arduino, etc.)
+
+---
+
+## 📜 Changelog
+v1.3.5
+. ✅ Added Hardware Reset Button
+. ✅ Baud Rate from main UI now overrides Settings
+. ✅ Improved UI layout and signal handling
+
+![For full version history](info.json)
+
+---
+
+## 🔑 How to Use
+1. Open the app in a compatible browser
+2. Click Connect, select your serial port
+3. Set baud rate and settings
+4. Start sending and receiving data
+5. Use Reset for quick hardware restart without disconnecting
+
+---
+
+## 📂 Project Structure
+serial-terminal/
+├── index.html
+├── style.css
+├── script.js
+├── info.json
+├── version.json
+├── menu.css
+├── at_commands.json
+├── favicon.ico
+└── README.md
+
+--
+
+## 🔒 License
+© 2025 me[R]a — All rights reserved.
 
 ---
 
