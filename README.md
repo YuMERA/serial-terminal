@@ -20,7 +20,7 @@
 - [Usage Guide](#-how-to-use)
 - [Changelog](#-changelog)
 - [License](#-license)
-- [Project Structure](#-structure)
+- [Project Structure](#-project-structure)
 
 ---
 
