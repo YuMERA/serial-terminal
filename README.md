@@ -57,11 +57,11 @@
 
 ## 📜 Changelog
 v1.3.5
-. ✅ Added Hardware Reset Button
-. ✅ Baud Rate from main UI now overrides Settings
-. ✅ Improved UI layout and signal handling
-
-![For full version history](info.json)
+- ✅ Added Hardware Reset Button
+- ✅ Baud Rate from main UI now overrides Settings
+- ✅ Improved UI layout and signal handling
+###
+![For full version history](./info.json)
 
 ---
 
@@ -75,16 +75,16 @@ v1.3.5
 ---
 
 ## 📂 Project Structure
-serial-terminal/
-├── index.html
-├── style.css
-├── script.js
-├── info.json
-├── version.json
-├── menu.css
-├── at_commands.json
-├── favicon.ico
-└── README.md
+- serial-terminal/
+- ├── index.html
+- ├── style.css
+- ├── script.js
+- ├── info.json
+- ├── version.json
+- ├── menu.css
+- ├── at_commands.json
+- ├── favicon.ico
+- └── README.md
 
 --
 
