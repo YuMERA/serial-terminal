@@ -44,7 +44,6 @@
 ### Dark Mode  
 ![Dark Mode Screenshot](./screenshots/dark-mode.png)
 
-*(Add your screenshots in a `screenshots/` folder in the repo)*  
 
 ---
 
