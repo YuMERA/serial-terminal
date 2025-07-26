@@ -496,17 +496,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
           // 🚨 Emergency AutoClear pre nego što browser postane spor
         const emergencyLimit = 10000;
+
         if (displayedLines.length > emergencyLimit) {
-
-            /*// Ručno praznimo sve strukture
-            receivedDataOutput.innerHTML = '';
-            pendingLines = [];
-            displayedLines = [];
-            rawLines = [];
-            rawLinesWithTimestamp = [];
-            totalLinesReceived = 0;*/
             clearBuffer();
-
             addSystemMessage(`<system message> - Emergency Auto-Clear activated at ${emergencyLimit} lines.`);
         }
 
@@ -777,7 +769,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 await writer.write(encoder.encode(dataToSend));
                 writer.releaseLock();
 
-                //addSystemMessage(`[Sent]: ${sendInput.value} [${lineEnding.toUpperCase()}]`);
+                // Dodaj liniju u prikaz
                 const sentText = escapeHtml(sendInput.value);
                 const formattedSent = `<span class="sent-command">[Sent]: ${sentText} [${lineEnding.toUpperCase()}]</span>`;
                 addSystemMessage(formattedSent, false, true);
@@ -1226,7 +1218,6 @@ document.addEventListener('DOMContentLoaded', () => {
     connectDisconnectButton.disabled = false;
     baudRateSelect.disabled = false;
     autoScrollCheckbox.checked = true;
-    //showTimestampCheckbox.checked = false;
     scrollLocked = !autoScrollCheckbox.checked;
     lineCountSpan.textContent = totalLinesReceived;
     bufferSizeDisplay.textContent = maxLinesToDisplay;
