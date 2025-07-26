@@ -1,5 +1,5 @@
 /*! 
-* Web Serial Terminal v1.3.3
+* Web Serial Terminal v1.3.5
 * (c) 2025 Mera System - All rights reserved
 * https://mera-system.com
 */
