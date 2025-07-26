@@ -952,70 +952,13 @@ document.addEventListener('DOMContentLoaded', () => {
             helpModal.style.display = 'none';
         }
     });
-    /*
-    // INFO MODAL
-    const infoLink = document.getElementById('infoLink');
-    const infoModal = document.getElementById('infoModal');
-    const closeInfoModal = document.getElementById('closeInfoModal');
-    const infoContainer = document.getElementById('infoContainer');
 
-    infoLink.addEventListener('click', (e) => {
-        e.preventDefault();
-        infoModal.style.display = 'block';
-        loadInfoData();
+    window.addEventListener('pageshow', function () {
+        // Zatvori meni ako je otvoren
+        document.getElementById('dropdownMenu').style.display = 'none';
+        // Ukloni active sa svih linkova
+        document.querySelectorAll('#dropdownMenu a').forEach(link => link.classList.remove('active'));
     });
-
-    closeInfoModal.addEventListener('click', () => {
-        infoModal.style.display = 'none';
-    });
-
-    window.addEventListener('click', (e) => {
-        if (e.target === infoModal) {
-            infoModal.style.display = 'none';
-        }
-    });
-
-    function loadInfoData() {
-        fetch('info.json')
-            .then(res => res.json())
-            .then(data => {
-                infoContainer.innerHTML = '';
-                data.forEach(entry => {
-                    const div = document.createElement('div');
-                    div.className = 'info-entry';
-                    div.innerHTML = `
-                        <div class="title">${entry.title}</div>
-                        <div class="timestamp">📅 ${entry.timestamp}</div>
-                        <div class="description">${entry.description}</div>
-                    `;
-                    infoContainer.appendChild(div);
-                });
-            })
-            .catch(err => {
-                infoContainer.innerHTML = '<p style="color:red;">Failed to load info content.</p>';
-                console.error('Error loading info.json:', err);
-            });
-    }*/
-
-    // Modal za Features & Notes
-    /*const featuresLink = document.getElementById('featuresLink');
-    const featuresModal = document.getElementById('featuresModal');
-    const closeFeaturesModal = document.getElementById('closeFeaturesModal');
-
-    featuresLink.addEventListener('click', (e) => {
-        e.preventDefault();
-        featuresModal.style.display = 'block';
-    });
-
-    closeFeaturesModal.addEventListener('click', () => {
-        featuresModal.style.display = 'none';
-    });
-
-    window.addEventListener('click', (e) => {
-        if (e.target === featuresModal) {
-            featuresModal.style.display = 'none';
-        }
-    });*/
 
     function setupAutoClear(minutes) {
         if (autoClearInterval) {

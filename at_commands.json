@@ -36,14 +36,6 @@
       "description": "Set WiFi mode to Station."
     },
     {
-      "cmd": "AT+CWJAP=\"SSID\",\"password\"",
-      "description": "Connect to WiFi network."
-    },
-    {
-      "cmd": "AT+GSLP=<time>",
-      "description": "Enter Deep-sleep mode."
-    },
-    {
       "cmd": "ATE0",
       "description": "Switch echo off."
     },
@@ -54,10 +46,6 @@
     {
       "cmd": "AT+RESTORE",
       "description": "Restore factory default settings of the module."
-    },
-    {
-      "cmd": "AT+SLEEP?",
-      "description": "Set the sleep mode."
     }
   ]
   

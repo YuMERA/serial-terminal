@@ -77,6 +77,8 @@
 ### 🛠 Fixed
 - Improved reset reliability by introducing a safe signal sequence before reset.
 
+---
+
 ### 🔖 v1.4.0 – Major UI Restructure
 - **What's New**
   - Replaced Info and Features modals with standalone responsive pages
