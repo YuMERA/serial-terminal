@@ -79,6 +79,9 @@ _For full changelog see [info.html](./info.html) or [info.json](./info.json)_
 - ├── index.html
 - ├── style.css
 - ├── script.js
+- ├── features.html
+- ├── info.html
+- ├── features.json
 - ├── info.json
 - ├── version.json
 - ├── menu.css
