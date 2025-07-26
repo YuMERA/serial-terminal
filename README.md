@@ -56,12 +56,12 @@
 ---
 
 ## 📜 Changelog
-v1.3.5
-- ✅ Added Hardware Reset Button
-- ✅ Baud Rate from main UI now overrides Settings
-- ✅ Improved UI layout and signal handling
-###
-![For full version history](./info.json)
+### v1.4.0
+- ✅ Moved Info & Features to separate pages
+- ✅ JSON-based dynamic loading for both sections
+- ✅ Added responsive design with full Dark mode support
+
+_For full changelog see [info.html](./info.html) or [info.json](./info.json)_
 
 ---
 

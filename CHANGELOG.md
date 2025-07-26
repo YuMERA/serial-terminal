@@ -77,6 +77,16 @@
 ### 🛠 Fixed
 - Improved reset reliability by introducing a safe signal sequence before reset.
 
+### 🔖 v1.4.0 – Major UI Restructure
+- **What's New**
+  - Replaced Info and Features modals with standalone responsive pages
+  - Dynamic content loading from JSON for easier updates
+  - Full Dark/Light theme support across new pages
+  - Improved navigation and cleaned unused modal-related scripts
+
+- **Improvements**
+  - Better readability on mobile and desktop
+  - Simplified app layout for a cleaner UI experience
 
 
 ## Previous Versions
