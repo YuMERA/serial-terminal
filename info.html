@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Info - Web Serial Terminal</title>
+        <link rel="stylesheet" href="style.css" />
+        <style>
+            body {
+                width: 80%;
+                display: block;
+                font-family: Arial, sans-serif;
+                margin: auto;
+                padding: 20px;
+                background: #f9f9f9;
+                color: #333;
+                transition: background 0.3s, color 0.3s;
+            }
+
+            .header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 20px;
+            }
+
+            .header h1 {
+                color: #787878;  
+                font-size: 1.8em;
+                margin: 0;
+            }
+
+            .back-link {
+                text-decoration: none;
+                font-size: 0.9em;
+                color: #007bff;
+                background: #e9ecef;
+                padding: 8px 14px;
+                border-radius: 6px;
+                transition: background 0.3s ease, color 0.3s;
+            }
+
+            .back-link:hover {
+                background: #d6d8db;
+            }
+
+            .info-container {
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .info-card {
+                background: #fff;
+                border-radius: 10px;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+                padding: 16px;
+                transition: background 0.3s, color 0.3s;
+            }
+
+            .info-card h2 {
+                font-size: 1.2em;
+                color: #0056b3;
+                margin: 0 0 8px 0;
+            }
+
+            .info-card .timestamp {
+                font-size: 0.85em;
+                color: #666;
+                margin-bottom: 10px;
+                display: block;
+            }
+
+            .info-card p {
+                font-size: 0.95em;
+                line-height: 1.5em;
+                margin: 0;
+            }
+
+            .timestamp i {
+                margin-right: 6px;
+                color: #007bff;
+            }
+
+            /* Dark Mode */
+            body.dark-mode {
+                background: #121212;
+                color: #f1f1f1;
+            }
+
+            body.dark-mode .back-link {
+                color: #fff;
+                background: #333;
+            }
+
+            body.dark-mode .back-link:hover {
+                background: #444;
+            }
+
+            body.dark-mode .info-card {
+                background: #1e1e1e;
+                box-shadow: 0 2px 8px rgba(255, 255, 255, 0.05);
+            }
+
+            body.dark-mode .info-card h2 {
+                color: #4dabf7;
+            }
+
+            body.dark-mode .info-card .timestamp {
+                color: #aaa;
+            }
+
+            body.dark-mode .timestamp i {
+                color: #4dabf7;
+            }
+
+            @media (max-width: 600px) {
+            body {
+                padding: 10px;
+                width: 95%;
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Application Info</h1>
+            <a href="index.html" class="back-link">← Back to App</a>
+        </div>
+
+        <div class="info-container" id="info-container">
+            Loading info...
+        </div>
+
+        <script>
+            // Apply dark mode if saved in localStorage
+            if (localStorage.getItem('appTheme') === 'dark') {
+            document.body.classList.add('dark-mode');
+            }
+
+            fetch('info.json')
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById('info-container');
+                container.innerHTML = '';
+                data.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'info-card';
+                div.innerHTML = `
+                    <h2>${item.title}</h2>
+                    <span class="timestamp">📅 ${item.timestamp}</span>
+                    <p>${item.description}</p>
+                `;
+                container.appendChild(div);
+                });
+            })
+            .catch(() => {
+                document.getElementById('info-container').textContent = 'Failed to load info.';
+            });
+        </script>
+    </body>
+</html>

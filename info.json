@@ -1,5 +1,15 @@
 [ 
   {
+    "title": "UI Restructure for Info and Features",
+    "timestamp": "2025-07-27 15:10",
+    "description": "Removed modals for Info and Features. Added standalone pages that load content from JSON files and fully support dark mode."
+  },
+  {
+    "title": "Improved Responsiveness",
+    "timestamp": "2025-07-27 15:15",
+    "description": "Features and Info pages are now responsive and optimized for mobile and desktop layouts."
+  },
+  {
     "title": "Hardware Reset Feature",
     "timestamp": "2025-07-25 12:40",
     "description": "Added a Reset button to the main interface that sends a hardware reset sequence using RTS and DTR signal toggling, without requiring disconnect/reconnect. Displays confirmation system messages."

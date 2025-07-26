@@ -952,7 +952,7 @@ document.addEventListener('DOMContentLoaded', () => {
             helpModal.style.display = 'none';
         }
     });
-
+    /*
     // INFO MODAL
     const infoLink = document.getElementById('infoLink');
     const infoModal = document.getElementById('infoModal');
@@ -995,10 +995,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 infoContainer.innerHTML = '<p style="color:red;">Failed to load info content.</p>';
                 console.error('Error loading info.json:', err);
             });
-    }
+    }*/
 
     // Modal za Features & Notes
-    const featuresLink = document.getElementById('featuresLink');
+    /*const featuresLink = document.getElementById('featuresLink');
     const featuresModal = document.getElementById('featuresModal');
     const closeFeaturesModal = document.getElementById('closeFeaturesModal');
 
@@ -1015,7 +1015,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target === featuresModal) {
             featuresModal.style.display = 'none';
         }
-    });
+    });*/
 
     function setupAutoClear(minutes) {
         if (autoClearInterval) {

@@ -1,0 +1,87 @@
+[
+    {
+      "category": "Hardware Reset",
+      "items": ["Added a dedicated Reset button that toggles RTS/DTR lines to restart connected devices without closing the serial port."]
+    },
+    {
+      "category": "Baud Rate Selection",
+      "items": ["Main screen baud rate now has priority over Settings value, allowing quick changes without using the modal."]
+    },
+    {
+      "category": "Emergency Auto-Clear",
+      "items": ["Automatically clears terminal output if the internal buffer exceeds 12,000 lines to maintain performance and responsiveness."]
+    },
+    {
+      "category": "Social Media Footer",
+      "items": ["Icons for GitHub, Twitter, and other platforms are now included in the footer with official brand colors and external links."]
+    },
+    {
+      "category": "API Support Detection",
+      "items": ["Users are notified if Web Serial API is unsupported (now hidden by default)."]
+    },
+    {
+      "category": "Export Terminal Data",
+      "items": ["Export current buffer as CSV or JSON via a modal interface with filename customization."]
+    },
+    {
+      "category": "Interface Updates",
+      "items": [
+        "Replaced modal-based Info and Features with standalone responsive pages.",
+        "Dynamic loading of content from JSON for easier maintenance.",
+        "Full Dark/Light theme support across all pages."
+      ]
+    },
+    {
+      "category": "Web Serial API",
+      "items": ["Direct browser access to serial ports with full control over DTR/RTS."]
+    },
+    {
+      "category": "Auto Scroll",
+      "items": ["Works only while the buffer is not full (under Max Lines). After that, scroll is always forced."]
+    },
+    {
+      "category": "Copy / Save",
+      "items": ["Only the most recent Max Lines will be copied or saved. Older data is removed from memory."]
+    },
+    {
+      "category": "RTS/DTR Control",
+      "items": ["User-configurable signals with status indicators."]
+    },
+    {
+      "category": "Pause Output",
+      "items": ["Pauses live data display. Incoming data is ignored during pause."]
+    },
+    {
+      "category": "Timestamp",
+      "items": ["Adds real-time timestamp (12h or 24h) to each line if enabled."]
+    },
+    {
+      "category": "Display Format",
+      "items": ["Switch between Normal / Hex / JSON views for incoming data."]
+    },
+    {
+      "category": "Search and Highlight",
+      "items": ["Inline search with results count."]
+    },
+    {
+      "category": "Auto-Clear",
+      "items": ["When active and connected, clears the terminal after selected time interval."]
+    },
+    {
+      "category": "Dark/Light Theme",
+      "items": ["Switch between themes using the 🌙/☀️ icon. Preference is remembered."]
+    },
+    {
+      "category": "Buffer Limit",
+      "items": ["Configurable in Settings. Determines how many recent lines are stored (min 100)."]
+    },
+    {
+      "category": "Predefined AT Commands",
+      "items": ["Quick insert from a popup list of ready-to-use AT commands."]
+    },
+    {
+      "category": "Settings Persistence",
+      "items": ["All options (baud rate, timestamps, themes, etc.) are saved locally."]
+    }
+  ]
+  

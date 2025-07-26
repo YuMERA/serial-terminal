@@ -835,17 +835,6 @@ select:focus {
     width: 320px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
-.modal-content.wide {
-    width: 600px;
-    max-height: 85vh;
-    overflow-y: auto;
-    line-height: 1.2em;
-}
-
-.modal-content.wide li {
-    line-height: 1.6em;
-    color: var(--info-entry-description);
-}
 
 .modal-content h3 {
     margin-top: 0;

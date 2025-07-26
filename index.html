@@ -26,8 +26,8 @@
                 <div id="menuToggle" class="menu-toggle" title="Open menu">&#9776;</div>
                 <div id="dropdownMenu" class="dropdown-menu">
                     <a href="https://mera-system.com" target="_blank"><span class="icon">🏠</span>Home</a>
-                    <a href="#" id="infoLink"><span class="icon">ℹ️</span>Info</a>
-                    <a href="#" id="featuresLink"><span class="icon">⚙️</span>Features</a>
+                    <a href="info.html"><span class="icon">ℹ️</span>Info</a>
+                    <a href="features.html"><span class="icon">⚙️</span>Features</a>
                     <a href="#" id="aboutLink"><span class="icon">📘</span>About</a>
                     <a href="#" id="helpLink"><span class="icon">❓</span>Help</a>
                     <a href="#" id="contactLink"><span class="icon">✉️</span>Contact Us</a>
@@ -339,48 +339,6 @@
             <p>
                 This application is designed to make serial communication simple, fast, and accessible directly from your browser.
             </p>
-        </div>
-    </div>
-
-    <!-- MODAL ZA INFO -->
-    <div id="infoModal" class="modal" style="display:none;">
-        <div class="modal-content wide">
-            <span id="closeInfoModal" class="close-button">&times;</span>
-            <h3>Information</h3>
-            <div id="infoContainer" class="info-container"></div>
-        </div>
-    </div>
-
-    <!-- MODAL: FEATURES / HOW IT WORKS -->
-    <div id="featuresModal" class="modal" style="display:none;">
-        <div class="modal-content wide">
-            <span id="closeFeaturesModal" class="close-button">&times;</span>
-            <h3>Application Features & Notes</h3>
-            <ul style="line-height: 1.6em;">
-                <li><strong>Hardware Reset:</strong> Added a dedicated Reset button that toggles RTS/DTR lines to restart connected devices without closing the serial port.</li>
-                <li><strong>Baud Rate Selection:</strong> Main screen baud rate now has priority over Settings value, allowing quick changes without using the modal.</li>
-                <li><strong>Emergency Auto-Clear:</strong> Automatically clears terminal output if the internal buffer exceeds 12,000 lines to maintain performance and responsiveness.</li>
-                <li><strong>Social Media Footer:</strong> Icons for GitHub, Twitter, and other platforms are now included in the footer with official brand colors and external links.</li>
-                <li><strong>API Support Detection:</strong> Users are notified if Web Serial API is unsupported (now hidden by default).</li>
-                <li><strong>Export Terminal Data:</strong> Export current buffer as CSV or JSON with a single click, respecting timestamp settings</li>
-                <li><strong>Color-coded Export Button:</strong> Easily recognizable purple button, styled to match Clear, Copy, and Save</li>
-                <li><strong>Prompt-based Format Selection:</strong> Choose between CSV and JSON dynamically when exporting</li>
-                <li><strong>Web Serial API:</strong> Direct browser access to serial ports</li>
-                <li><strong>Auto Scroll:</strong> Works only while the buffer is not full (under Max Lines). After that, scroll is always forced.</li>
-                <li><strong>Copy / Save:</strong> Only the most recent <strong>Max Lines</strong> will be copied or saved. Older data is removed from memory.</li>
-                <li><strong>RTS/DTR Control:</strong> User-configurable signals with status indicators</li>
-                <li><strong>Pause Output:</strong> Pauses live data display. Incoming data is ignored during pause.</li>
-                <li><strong>Timestamp:</strong> Adds real-time timestamp (12h or 24h) to each line if enabled.</li>
-                <li><strong>Display Format:</strong> Switch between Normal / Hex / JSON views for incoming data.</li>
-                <li><strong>Search and Highlight:</strong> Inline search with results count</li>
-                <li><strong>Auto-Clear:</strong> When active and connected, clears the terminal after selected time interval.</li>
-                <li><strong>Dark/Light Theme:</strong> Switch between themes using the 🌙/☀️ icon. Preference is remembered.</li>
-                <li><strong>Buffer Limit:</strong> Configurable in Settings. Determines how many recent lines are stored (min 100).</li>
-                <li><strong>Predefined AT Commands:</strong> Quick insert from a popup list of ready-to-use AT commands.</li>
-                <li><strong>Settings Persistence:</strong> All options (baud rate, timestamps, themes, etc.) are saved locally.</li>
-            </ul>
-            <p style="font-size: 0.9em; color: #777;">These behaviors ensure performance, usability, and stability during continuous serial communication.</p>
-            
         </div>
     </div>
 
