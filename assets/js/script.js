@@ -5,7 +5,7 @@
 */
 document.addEventListener('DOMContentLoaded', () => {
 
-    /*// Provera da li browser podrzava Serial API
+    // Provera da li browser podrzava Serial API
     if (!('serial' in navigator)) {
         const unsupportedNotice = document.getElementById('unsupportedNotice');
         if (unsupportedNotice ) {
@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.style.overflow = 'hidden';
         }
         return;
-    }*/        
+    }        
 
     const connectDisconnectButton = document.getElementById('connectDisconnectButton');
     const baudRateSelect = document.getElementById('baudRate');
