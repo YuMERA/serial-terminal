@@ -90,6 +90,36 @@
   - Better readability on mobile and desktop
   - Simplified app layout for a cleaner UI experience
 
+---
+
+## 🚀 What's New in v1.4.4
+
+### ✅ Added
+- **AT Commands page** with categorized tabs (General, Wi-Fi, MQTT, Custom)
+- **Real-time search** with keyword highlighting and clear button
+- **Responsive design** for AT Commands page (works on mobile and desktop)
+- **Dark/Light theme support** for the new page
+
+### 🔗 Integration
+- Linked main app with AT Commands page:
+  - Selected command from AT page auto-fills in the main app input field
+  - Preserves user flow between pages
+
+### 🛠 Project Structure
+- Reorganized files:
+  - CSS → `assets/css/`
+  - JS → `assets/js/`
+  - JSON → `assets/json/`
+
+---
+
+**Full changelog**:
+- Added AT Commands Library page
+- Implemented responsive tab navigation + dropdown
+- Added search with debounce and text highlight
+- Synced AT page with main app via `localStorage`
+- Improved Dark/Light theme handling
+
 
 ## Previous Versions
 
