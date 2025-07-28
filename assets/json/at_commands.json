@@ -1,0 +1,75 @@
+{
+    "General": [
+        {
+            "command": "AT",
+            "description": "Test command to check connection",
+            "example": "AT"
+        },
+        {
+            "command": "AT+GMR",
+            "description": "Get firmware version",
+            "example": "AT+GMR"
+        },
+        {
+            "command": "AT+RST",
+            "description": "Restart the device",
+            "example": "AT+RST"
+        },
+        {
+            "command": "AT+CMD",
+            "description": "Custom test command",
+            "example": "AT+CMD"
+        }
+    ],
+    "Wi-Fi": [
+        {
+            "command": "AT+CWJAP",
+            "description": "Connect to Wi-Fi",
+            "example": "AT+CWJAP=\"SSID\",\"password\""
+        },
+        {
+            "command": "AT+CWLAP",
+            "description": "List available Wi-Fi networks",
+            "example": "AT+CWLAP"
+        },
+        {
+            "command": "AT+CIFSR",
+            "description": "Get local IP address",
+            "example": "AT+CIFSR"
+        }
+    ],
+    "MQTT": [
+        {
+            "command": "AT+MQTTCONN",
+            "description": "Connect to MQTT broker",
+            "example": "AT+MQTTCONN=\"broker.hivemq.com\",1883"
+        },
+        {
+            "command": "AT+MQTTSUB",
+            "description": "Subscribe to MQTT topic",
+            "example": "AT+MQTTSUB=\"topic/test\",0"
+        },
+        {
+            "command": "AT+MQTTPUB",
+            "description": "Publish message to topic",
+            "example": "AT+MQTTPUB=\"topic/test\",\"Hello\""
+        }
+    ],
+    "Custom": [
+        {
+            "command": "AT+LEDON",
+            "description": "Turn on LED",
+            "example": "AT+LEDON"
+        },
+        {
+            "command": "AT+LEDOFF",
+            "description": "Turn off LED",
+            "example": "AT+LEDOFF"
+        },
+        {
+            "command": "AT+SETNAME",
+            "description": "Set custom device name",
+            "example": "AT+SETNAME=MyDevice"
+        }
+    ]
+}

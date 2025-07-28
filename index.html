@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Web Serial Terminal</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="menu.css">
-    <link rel="icon" href="favicon.ico">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/menu.css">
+    <link rel="icon" href="assets/img/favicon.ico">
 </head>
 <body>
 
@@ -26,8 +26,8 @@
                 <div id="menuToggle" class="menu-toggle" title="Open menu">&#9776;</div>
                 <div id="dropdownMenu" class="dropdown-menu">
                     <a href="https://mera-system.com" target="_blank"><span class="icon">🏠</span>Home</a>
-                    <a href="info.html"><span class="icon">ℹ️</span>Info</a>
-                    <a href="features.html"><span class="icon">⚙️</span>Features</a>
+                    <a href="pages/info.html"><span class="icon">ℹ️</span>Info</a>
+                    <a href="pages/features.html"><span class="icon">⚙️</span>Features</a>
                     <a href="#" id="aboutLink"><span class="icon">📘</span>About</a>
                     <a href="#" id="helpLink"><span class="icon">❓</span>Help</a>
                     <a href="#" id="contactLink"><span class="icon">✉️</span>Contact Us</a>
@@ -283,6 +283,12 @@
             <span class="close-button" id="closeAtModal">&times;</span>
             <h3>AT Commands</h3>
             <ul id="atCommandList" style="list-style-type: none; padding-left: 0;"></ul>
+            <div style="text-align:center; margin-top:15px;">
+                <a href="pages/at-commands.html" class="more-link">
+                    More Commands →
+                </a>
+            </div>
+            
         </div>
     </div>
 
@@ -364,6 +370,6 @@
         </div>
       </div>      
 
-    <script src="script.js" defer></script>
+    <script src="assets/js/script.js" defer></script>
 </body>
 </html>

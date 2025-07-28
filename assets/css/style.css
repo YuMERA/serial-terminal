@@ -926,8 +926,6 @@ select:focus {
     background-color: #0056b3;
 }
 
-
-
 .modal-content li {
     line-height: 1.6em;
     color: var(--text-color);
@@ -961,6 +959,20 @@ select:focus {
 .close-button:hover {
     color: red;
 }
+
+.more-link {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 0.95em;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.more-link:hover {
+    text-decoration: underline;
+    color: #0056b3;
+}
+
 
 /* Ikone iznad terminal sekcije */
 .top-icons {

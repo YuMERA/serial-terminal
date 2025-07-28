@@ -5,7 +5,7 @@
 */
 document.addEventListener('DOMContentLoaded', () => {
 
-    // Provera da li browser podrzava Serial API
+    /*// Provera da li browser podrzava Serial API
     if (!('serial' in navigator)) {
         const unsupportedNotice = document.getElementById('unsupportedNotice');
         if (unsupportedNotice ) {
@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.style.overflow = 'hidden';
         }
         return;
-    }        
+    }*/        
 
     const connectDisconnectButton = document.getElementById('connectDisconnectButton');
     const baudRateSelect = document.getElementById('baudRate');
@@ -50,6 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalAutoClear = document.getElementById('modalAutoClear');
 
     const pauseOutputCheckbox = document.getElementById('pauseOutput');
+
     pauseOutputCheckbox.addEventListener('change', () => {
         updateOutputDisplay();
         updateSearchInputAvailability();
@@ -63,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
         scrollLocked = !autoScrollCheckbox.checked;
         updateSearchInputAvailability();
     });
-    
+
     // Tooltip tekst
     const AUTO_SCROLL_ENABLED_TOOLTIP  = "Enable or disable automatic scrolling of incoming data.";
     const AUTO_SCROLL_DISABLED_TOOLTIP = "Auto scroll works only until buffer limit is reached. After that, scrolling is always automatic.";
@@ -837,7 +838,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ⬇️ Učitaj AT komande iz JSON fajla
-    fetch('at_commands.json')
+    fetch('assets/json/at_commands_modal.json')
         .then(res => res.json())
         .then(commands => {
             commands.forEach(cmdObj => {
@@ -868,6 +869,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const clearInputButton = document.getElementById('clearInputButton');
+     // ✅ Proveri da li postoji izabrana komanda iz AT stranice
+     const selectedCommand = localStorage.getItem("selectedATCommand");
+     if (selectedCommand) {
+         sendInput.value = selectedCommand;
+ 
+         // ✅ Ručno prikaži X dugme jer polje više nije prazno
+         if (clearInputButton) {
+             clearInputButton.style.display = 'inline';
+         }
+ 
+         localStorage.removeItem("selectedATCommand");
+     }
 
     sendInput.addEventListener('input', () => {
         clearInputButton.style.display = sendInput.value.trim().length > 0 ? 'inline' : 'none';
@@ -958,6 +971,9 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('dropdownMenu').style.display = 'none';
         // Ukloni active sa svih linkova
         document.querySelectorAll('#dropdownMenu a').forEach(link => link.classList.remove('active'));
+        if (sendInput && clearInputButton) {
+            clearInputButton.style.display = sendInput.value.trim().length > 0 ? 'inline' : 'none';
+        }
     });
 
     function setupAutoClear(minutes) {
@@ -1144,7 +1160,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    fetch('version.json')
+    fetch('assets/json/version.json')
         .then(response => response.json())
         .then(data => {
             document.getElementById('appVersion').textContent = data.version;

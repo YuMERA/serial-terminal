@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AT Commands Library</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/css/at-commands.css">
+    <link rel="icon" href="../assets/img/favicon.ico">
+</head>
+<body class="light-theme">
+
+    <!-- Header -->
+    <header class="at-header">
+        <h1>AT Commands Library</h1>
+        <a href="../index.html" class="back-button">⬅ Back to App</a>
+    </header>
+
+    <!-- Tab navigacija -->
+    <div class="tab-container">
+        <button class="tab-button active" data-tab="general">General</button>
+        <button class="tab-button" data-tab="wifi">Wi-Fi</button>
+        <button class="tab-button" data-tab="mqtt">MQTT</button>
+        <button class="tab-button" data-tab="custom">Custom</button>
+    </div>
+
+    <div class="tab-dropdown">
+        <select id="tabSelect">
+            <option value="general">General</option>
+            <option value="wifi">Wi-Fi</option>
+            <option value="mqtt">MQTT</option>
+            <option value="custom">Custom</option>
+        </select>
+    </div>
+
+    <!-- Sadržaj tabova -->
+    <div class="tab-content active-tab" id="general">
+        <div class="tab-header"><h2>General Commands</h2></div>
+        <div class="commands-grid"></div>
+    </div>
+
+    <div class="tab-content" id="wifi">
+        <div class="tab-header"><h2>Wi-Fi Commands</h2></div>
+        <div class="commands-grid"></div>
+    </div>
+
+    <div class="tab-content" id="mqtt">
+        <div class="tab-header"><h2>MQTT Commands</h2></div>
+        <div class="commands-grid"></div>
+    </div>
+
+    <div class="tab-content" id="custom">
+        <div class="tab-header"><h2>Custom Commands</h2></div>
+        <div class="commands-grid"></div>
+    </div>
+
+    <!-- ✅ Search container definisan SAMO jednom -->
+    <div class="search-container">
+        <div class="search-wrapper">
+            <input type="text" id="searchInput" placeholder="Search commands...">
+            <span id="clearSearchButton" class="clear-search">×</span>
+        </div>
+    </div>
+
+    <!-- Poruka za nema rezultata -->
+    <div id="noResults" class="no-results">No results found</div>
+
+    <!-- JS -->
+    <script src="../assets/js/at-commands.js" defer></script>
+</body>
+</html>

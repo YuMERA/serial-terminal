@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Features - Web Serial Terminal</title>
-        <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="../assets/css/style.css" />
         <style>
             body {
                 display: block;  
@@ -123,7 +123,7 @@
     <body>
         <div class="header">
             <h1>Application Features</h1>
-            <a href="index.html" class="back-link">← Back to App</a>
+            <a href="../index.html" class="back-link">← Back to App</a>
         </div>
 
         <div class="features-container" id="features-container">
@@ -136,7 +136,7 @@
             document.body.classList.add('dark-mode');
             }
 
-            fetch('features.json')
+            fetch('../assets/json/features.json')
             .then(response => response.json())
             .then(data => {
                 const container = document.getElementById('features-container');
