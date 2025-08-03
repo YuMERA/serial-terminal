@@ -130,7 +130,6 @@
                     </div>
                         
                 </div>
-                <!-- <textarea id="receivedDataOutput" readonly></textarea> -->
                 <div id="receivedDataOutput" class="output-terminal"></div>
             </div>
 
@@ -280,17 +279,48 @@
     <!-- MODAL za AT komande -->
     <div id="atCommandsModal" class="modal" style="display:none;">
         <div class="modal-content">
-            <span class="close-button" id="closeAtModal">&times;</span>
+            <span class="close-button" id="closeAtModal" >&times;</span>
             <h3>AT Commands</h3>
             <ul id="atCommandList" style="list-style-type: none; padding-left: 0;"></ul>
             <div style="text-align:center; margin-top:15px;">
-                <a href="pages/at-commands.html" class="more-link">
+                <a href="#" id="moreCommandsLink">
                     More Commands →
                 </a>
             </div>
-            
         </div>
     </div>
+
+    <!-- ✅ Fullscreen AT Commands Modal -->
+    <div id="atModal" class="at-modal">
+        <div class="at-modal-content">
+            <span id="atModalClose" class="close-button class="at-close">&times;</span>
+            <header class="at-header">
+                <h1>AT Commands</h1>
+            </header>
+            <div class="at-modal-body">
+                <!-- ✅ Tab navigacija -->
+                <div id="atTabContainer" class="tab-container"></div>
+                
+                <div class="tab-dropdown">
+                    <select id="atTabSelect"></select>
+                </div>
+
+                <!-- ✅ Search bar -->
+                <div class="search-container">
+                    <div class="search-wrapper">
+                        <input type="text" id="atModalSearchInput" placeholder="Search commands...">
+                        <span id="atModalClearButton" class="clear-search">×</span>
+                    </div>
+                </div>
+
+                <!-- ✅ Dinamički sadržaj kartica -->
+                <div id="atCommandsWrapper" class="commands-grid"></div>
+
+                <div id="atModalNoResults" class="no-results">No results found</div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- MODAL: ABOUT -->
     <div id="aboutModal" class="modal" style="display:none;">

@@ -1,5 +1,5 @@
 /*! 
-* Web Serial Terminal v1.3.5
+* Web Serial Terminal v1.5.0
 * (c) 2025 Mera System - All rights reserved
 * https://mera-system.com
 */
@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.style.overflow = 'hidden';
         }
         return;
-    }        
+    }      
 
     const connectDisconnectButton = document.getElementById('connectDisconnectButton');
     const baudRateSelect = document.getElementById('baudRate');
@@ -1170,6 +1170,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('appVersion').textContent = 'v1.x.x'; // fallback
             document.getElementById('aboutVersion').textContent = 'v1.x.x'; // fallback
     });
+    
 
     applyThemeFromStorage(); // ✅ Pozovi odmah da se tema učita
 
@@ -1183,4 +1184,200 @@ document.addEventListener('DOMContentLoaded', () => {
     
     updateOutputDisplay();
     updateSearchInputAvailability();
+
+
+
+    // ✅ ELEMENTI AT MODALA
+    const atModal = document.getElementById("atModal");
+    const atModalClose = document.getElementById("atModalClose");
+    const atCommandsWrapper = document.getElementById("atCommandsWrapper");
+    const atModalSearchInput = document.getElementById("atModalSearchInput");
+    const atModalClearButton = document.getElementById("atModalClearButton");
+    const atModalNoResults = document.getElementById("atModalNoResults");
+    const atTabContainer = document.getElementById("atTabContainer");
+
+    // Dugme iz osnovnog AT modala
+    const moreCommandsLink = document.getElementById("moreCommandsLink");
+
+    // --- 1. OTVARANJE MODALA ---
+    if (moreCommandsLink) {
+        moreCommandsLink.addEventListener("click", function (e) {
+            e.preventDefault();
+
+            // Zatvori osnovni modal ako postoji
+            const basicAtModal = document.getElementById("atCommandsModal");
+            if (basicAtModal) basicAtModal.style.display = "none";
+
+            // Prikaži fullscreen modal
+            atModal.style.display = "block";
+
+            // Ako tabovi još nisu učitani → učitaj iz JSON-a
+            if (!atTabContainer.hasChildNodes()) {
+                loadAtCommands();
+            }
+        });
+    }
+
+    // --- 2. ZATVARANJE MODALA ---
+    if (atModalClose) {
+        atModalClose.addEventListener("click", function () {
+            atModal.style.display = "none";
+        });
+    }
+
+    window.addEventListener("click", function (e) {
+        if (e.target === atModal) {
+            atModal.style.display = "none";
+        }
+    });
+
+    // --- 3. UČITAVANJE KOMANDI IZ JSON-A ---
+    function loadAtCommands() {
+        fetch("assets/json/at_commands.json")
+            .then(response => response.json())
+            .then(data => {
+                const categories = Object.keys(data);
+    
+                // ✅ Generisanje tab dugmadi i popunjavanje select-a
+                categories.forEach((category, index) => {
+                    const btn = document.createElement("button");
+                    btn.className = "tab-button";
+                    btn.textContent = category;
+                    btn.dataset.tab = category;
+                    if (index === 0) btn.classList.add("active");
+                    atTabContainer.appendChild(btn);
+    
+                    // Opcije za dropdown
+                    const option = document.createElement("option");
+                    option.value = category;
+                    option.textContent = category;
+                    atTabSelect.appendChild(option);
+    
+                    btn.addEventListener("click", () => {
+                        switchTab(category, data);
+                    });
+                });
+    
+                // ✅ Event za dropdown
+                atTabSelect.addEventListener("change", function () {
+                    switchTab(this.value, data);
+                });
+    
+                // ✅ Prikaži prvi tab po defaultu
+                atTabSelect.value = categories[0]; // setuj dropdown na prvi tab
+                switchTab(categories[0], data);
+            })
+            .catch(err => console.error("Error loading AT commands:", err));
+    }
+
+    // --- 4. RENDER KOMANDI ---
+    function renderAtCommands(commandsArray) {
+        atCommandsWrapper.innerHTML = "";
+        commandsArray.forEach(cmd => {
+            const card = document.createElement("div");
+            card.className = "command-card";
+            card.setAttribute('data-original', `
+                <h3>${cmd.command}</h3>
+                <p><strong>Description:</strong> ${cmd.description}</p>
+                <p><strong>Example:</strong> ${cmd.example}</p>
+            `);
+            card.innerHTML = card.getAttribute('data-original');
+
+            // Klik na komandu -> ubaci u sendInput glavne aplikacije
+            card.addEventListener("click", () => {
+                const sendInput = document.getElementById("sendInput");
+                if (sendInput) {
+                    sendInput.value = cmd.command;
+                    const clearBtn = document.getElementById("clearInputButton");
+                    if (clearBtn) clearBtn.style.display = "inline";
+                }
+                atModal.style.display = "none";
+            });
+
+            atCommandsWrapper.appendChild(card);
+        });
+    }
+
+    // --- 5. SEARCH SA HIGHLIGHT ---
+    if (atModalSearchInput) {
+        atModalSearchInput.addEventListener("input", function () {
+            atModalClearButton.style.display = this.value.trim().length > 0 ? 'inline' : 'none';
+            applyAtSearch(this.value);
+        });
+    }
+
+    if (atModalClearButton) {
+        atModalClearButton.addEventListener("click", function () {
+            atModalSearchInput.value = "";
+            atModalClearButton.style.display = "none";
+            atModalNoResults.style.display = "none";
+            document.querySelectorAll('#atCommandsWrapper .command-card').forEach(card => {
+                card.style.display = 'block';
+                card.innerHTML = card.getAttribute('data-original');
+            });
+        });
+    }
+
+    function applyAtSearch(query) {
+        const filter = query.toLowerCase();
+        const cards = document.querySelectorAll('#atCommandsWrapper .command-card');
+        let visibleCount = 0;
+
+        cards.forEach(card => {
+            const originalHTML = card.getAttribute('data-original');
+            card.innerHTML = originalHTML; // reset highlight
+            const text = card.textContent.toLowerCase();
+
+            if (filter && text.includes(filter)) {
+                card.style.display = 'block';
+                visibleCount++;
+
+                // ✅ Highlight text
+                const regex = new RegExp(`(${filter})`, 'gi');
+                card.innerHTML = card.innerHTML.replace(regex, '<mark>$1</mark>');
+            } else if (!filter) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        atModalNoResults.style.display = (filter && visibleCount === 0) ? 'block' : 'none';
+    }
+
+    // --- 6. ESC briše pretragu ---
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && atModal.style.display === 'block') {
+            atModalSearchInput.value = '';
+            atModalClearButton.style.display = 'none';
+            atModalNoResults.style.display = 'none';
+            document.querySelectorAll('#atCommandsWrapper .command-card').forEach(card => {
+                card.style.display = 'block';
+                card.innerHTML = card.getAttribute('data-original');
+            });
+        }
+    });
+
+    // Nova funkcija za promenu taba
+    function switchTab(category, data) {
+        // Aktiviraj dugme
+        document.querySelectorAll("#atTabContainer .tab-button")
+            .forEach(b => b.classList.remove("active"));
+        const activeBtn = document.querySelector(`.tab-button[data-tab="${category}"]`);
+        if (activeBtn) activeBtn.classList.add("active");
+    
+        // ✅ Resetuj search prilikom promene taba
+        atModalSearchInput.value = "";
+        atModalClearButton.style.display = "none";
+        atModalNoResults.style.display = "none";
+    
+        // ✅ Ažuriraj dropdown na izabrani tab
+        atTabSelect.value = category;
+    
+        // Renderuj komande
+        renderAtCommands(data[category]);
+    }
+
+
+
 });

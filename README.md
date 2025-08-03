@@ -25,7 +25,7 @@
 ---
 
 ## 🚀 Features
-✔ Serial Communication via Web Serial API  
+✔ Serial Communication via **Web Serial API**  
 ✔ Connect / Disconnect with **dynamic baud rate**  
 ✔ **Hardware Reset** (RTS/DTR toggle)  
 ✔ Live Terminal:
@@ -34,60 +34,70 @@
 - Auto-scroll & Auto-clear  
 ✔ Export Options: TXT, JSON, CSV  
 ✔ **Custom Settings** (baud, data bits, parity, RTS/DTR)  
-✔ Dark & Light Themes  
-✔ **Emergency Auto-Clear** at 12,000 lines for browser stability  
+✔ **Emergency Auto-Clear** at 12,000 lines  
+✔ **Dark & Light Themes**  
+✔ **AT Commands Library (NEW in v1.5.0)**:
+- Full-screen modal with categorized tabs
+- Dynamic JSON-based data (150+ commands)
+- Search with highlight and quick clear
+- Responsive layout (tabs on desktop, dropdown on mobile)
 
 ---
 
 ## 🖼 Screenshots
-### Light Mode  
-![Light Mode Screenshot](./screenshots/light-mode.png)
+### Main UI
+![Main Light Mode](./screenshots/light-mode.png)
+![Main Dark Mode](./screenshots/dark-mode.png)
 
-### Dark Mode  
-![Dark Mode Screenshot](./screenshots/dark-mode.png)
+### AT Commands Modal
+![AT Commands Light Mode](./screenshots/at-light.png)
+![AT Commands Dark Mode](./screenshots/at-dark.png)
 
 ---
 
 ## 🛠 Requirements
 - Browser: **Chrome**, **Edge**, or any with Web Serial API
 - HTTPS connection (required by Web Serial)
-- USB device supporting serial communication (ESP32, Arduino, etc.)
+- USB device supporting serial communication (ESP32, Arduino, SIM Modem)
 
 ---
 
 ## 📜 Changelog
-### v1.4.0
-- ✅ Moved Info & Features to separate pages
-- ✅ JSON-based dynamic loading for both sections
-- ✅ Added responsive design with full Dark mode support
-
-_For full changelog see [info.html](./info.html) or [info.json](./info.json)_
+See full history in [CHANGELOG.md](./CHANGELOG.md)
 
 ---
 
 ## 🔑 How to Use
 1. Open the app in a compatible browser
-2. Click Connect, select your serial port
-3. Set baud rate and settings
+2. Click **Connect**, select your serial port
+3. Set baud rate and other settings
 4. Start sending and receiving data
-5. Use Reset for quick hardware restart without disconnecting
+5. Open **AT Commands modal** to quickly insert commands
+6. Use **Reset** for hardware restart without disconnecting
 
 ---
 
 ## 📂 Project Structure
-- serial-terminal/
-- ├── index.html
-- ├── style.css
-- ├── script.js
-- ├── features.html
-- ├── info.html
-- ├── features.json
-- ├── info.json
-- ├── version.json
-- ├── menu.css
-- ├── at_commands.json
-- ├── favicon.ico
-- └── README.md
+
+serial-terminal/
+├── index.html
+├── assets/
+│ ├── css/
+│ │ ├── style.css
+│ │ └── menu.css
+│ ├── js/
+│ │ ├── script.js
+│ │ └── at-modal.js
+│ ├── json/
+│ │ ├── at_commands.json
+│ │ ├── features.json
+│ │ ├── info.json
+│ │ └── version.json
+│ └── img/
+│ └── favicon.ico
+├── CHANGELOG.md
+├── README.md
+└── /screenshots/
 
 ---
 

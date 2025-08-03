@@ -2,74 +2,398 @@
     "General": [
         {
             "command": "AT",
-            "description": "Test command to check connection",
+            "description": "Test AT startup",
             "example": "AT"
         },
         {
+            "command": "ATI",
+            "description": "Display product identification",
+            "example": "ATI"
+        },
+        {
             "command": "AT+GMR",
-            "description": "Get firmware version",
+            "description": "Show firmware version",
             "example": "AT+GMR"
         },
         {
             "command": "AT+RST",
-            "description": "Restart the device",
+            "description": "Restart the module",
             "example": "AT+RST"
         },
         {
-            "command": "AT+CMD",
-            "description": "Custom test command",
-            "example": "AT+CMD"
+            "command": "AT+CMD?",
+            "description": "List supported commands",
+            "example": "AT+CMD?"
+        },
+        {
+            "command": "AT+UART?",
+            "description": "Query UART settings",
+            "example": "AT+UART?"
+        },
+        {
+            "command": "AT+SLEEP=0",
+            "description": "Disable sleep mode",
+            "example": "AT+SLEEP=0"
+        },
+        {
+            "command": "AT+SLEEP=1",
+            "description": "Enable light sleep mode",
+            "example": "AT+SLEEP=1"
+        },
+        {
+            "command": "AT+SLEEP=2",
+            "description": "Enable deep sleep mode",
+            "example": "AT+SLEEP=2"
+        },
+        {
+            "command": "AT+SYSRAM?",
+            "description": "Check RAM usage",
+            "example": "AT+SYSRAM?"
+        },
+        {
+            "command": "AT+SYSFLASH?",
+            "description": "Check flash usage",
+            "example": "AT+SYSFLASH?"
+        },
+        {
+            "command": "AT+SYSMSG?",
+            "description": "System message configuration",
+            "example": "AT+SYSMSG?"
         }
     ],
-    "Wi-Fi": [
+    "Wi-Fi (ESP32)": [
         {
-            "command": "AT+CWJAP",
+            "command": "AT+CWMODE=1",
+            "description": "Set Wi-Fi mode to Station",
+            "example": "AT+CWMODE=1"
+        },
+        {
+            "command": "AT+CWMODE=2",
+            "description": "Set Wi-Fi mode to SoftAP",
+            "example": "AT+CWMODE=2"
+        },
+        {
+            "command": "AT+CWMODE=3",
+            "description": "Set Wi-Fi mode to SoftAP+Station",
+            "example": "AT+CWMODE=3"
+        },
+        {
+            "command": "AT+CWMODE?",
+            "description": "Query Wi-Fi mode",
+            "example": "AT+CWMODE?"
+        },
+        {
+            "command": "AT+CWJAP=\"SSID\",\"PASS\"",
             "description": "Connect to Wi-Fi",
-            "example": "AT+CWJAP=\"SSID\",\"password\""
+            "example": "AT+CWJAP=\"MyWiFi\",\"mypassword\""
+        },
+        {
+            "command": "AT+CWQAP",
+            "description": "Disconnect from AP",
+            "example": "AT+CWQAP"
         },
         {
             "command": "AT+CWLAP",
-            "description": "List available Wi-Fi networks",
+            "description": "List available APs",
             "example": "AT+CWLAP"
+        },
+        {
+            "command": "AT+CWSAP=\"SSID\",\"PASS\",5,3",
+            "description": "Configure SoftAP",
+            "example": "AT+CWSAP=\"ESP_AP\",\"12345678\",5,3"
+        },
+        {
+            "command": "AT+CIFSR",
+            "description": "Get IP address",
+            "example": "AT+CIFSR"
+        },
+        {
+            "command": "AT+CIPSTART=\"TCP\",\"192.168.1.10\",80",
+            "description": "Start TCP connection",
+            "example": "AT+CIPSTART=\"TCP\",\"192.168.1.10\",80"
+        },
+        {
+            "command": "AT+CIPSEND=4",
+            "description": "Send data",
+            "example": "AT+CIPSEND=4"
+        },
+        {
+            "command": "AT+CIPCLOSE",
+            "description": "Close TCP/UDP connection",
+            "example": "AT+CIPCLOSE"
+        },
+        {
+            "command": "AT+CIPMUX=1",
+            "description": "Enable multiple connections",
+            "example": "AT+CIPMUX=1"
+        },
+        {
+            "command": "AT+CWJAP?",
+            "description": "Query connected AP",
+            "example": "AT+CWJAP?"
+        },
+        {
+            "command": "AT+CIPSTATUS",
+            "description": "Check TCP/UDP connection status",
+            "example": "AT+CIPSTATUS"
+        },
+        {
+            "command": "AT+CIPSERVER=1,80",
+            "description": "Start TCP server on port 80",
+            "example": "AT+CIPSERVER=1,80"
+        },
+        {
+            "command": "AT+CIPSERVER=0",
+            "description": "Stop TCP server",
+            "example": "AT+CIPSERVER=0"
+        },
+        {
+            "command": "AT+CIPSTO=60",
+            "description": "Set server timeout",
+            "example": "AT+CIPSTO=60"
+        },
+        {
+            "command": "AT+CIPSSLCCONF?",
+            "description": "Query SSL client config",
+            "example": "AT+CIPSSLCCONF?"
+        }
+    ],
+    "BLE (ESP32)": [
+        {
+            "command": "AT+BLEINIT=0",
+            "description": "Disable BLE",
+            "example": "AT+BLEINIT=0"
+        },
+        {
+            "command": "AT+BLEINIT=1",
+            "description": "Initialize BLE as server",
+            "example": "AT+BLEINIT=1"
+        },
+        {
+            "command": "AT+BLEINIT=2",
+            "description": "Initialize BLE as client",
+            "example": "AT+BLEINIT=2"
+        },
+        {
+            "command": "AT+BLESCAN=1",
+            "description": "Start BLE scan",
+            "example": "AT+BLESCAN=1"
+        },
+        {
+            "command": "AT+BLESCAN=0",
+            "description": "Stop BLE scan",
+            "example": "AT+BLESCAN=0"
+        },
+        {
+            "command": "AT+BLECONN=0,\"MAC\"",
+            "description": "Connect to BLE device",
+            "example": "AT+BLECONN=0,\"A1:B2:C3:D4:E5:F6\""
+        },
+        {
+            "command": "AT+BLEDISCONN=0",
+            "description": "Disconnect BLE",
+            "example": "AT+BLEDISCONN=0"
+        },
+        {
+            "command": "AT+BLEGATTSSRVCRE",
+            "description": "Create GATT server",
+            "example": "AT+BLEGATTSSRVCRE"
+        },
+        {
+            "command": "AT+BLEGATTSSRVSTART",
+            "description": "Start GATT server",
+            "example": "AT+BLEGATTSSRVSTART"
+        },
+        {
+            "command": "AT+BLEGATTSCHAR",
+            "description": "Add GATT characteristic",
+            "example": "AT+BLEGATTSCHAR"
+        }
+    ],
+    "SIM Modem": [
+        {
+            "command": "AT+CSQ",
+            "description": "Signal quality",
+            "example": "AT+CSQ"
+        },
+        {
+            "command": "AT+CREG?",
+            "description": "Network registration status",
+            "example": "AT+CREG?"
+        },
+        {
+            "command": "AT+CMGF=1",
+            "description": "Set SMS text mode",
+            "example": "AT+CMGF=1"
+        },
+        {
+            "command": "AT+CMGS=\"+123456789\"",
+            "description": "Send SMS",
+            "example": "AT+CMGS=\"+123456789\""
+        },
+        {
+            "command": "AT+CMGR=1",
+            "description": "Read SMS",
+            "example": "AT+CMGR=1"
+        },
+        {
+            "command": "AT+CMGD=1",
+            "description": "Delete SMS",
+            "example": "AT+CMGD=1"
+        },
+        {
+            "command": "AT+CGATT?",
+            "description": "Check GPRS attach",
+            "example": "AT+CGATT?"
+        },
+        {
+            "command": "AT+SAPBR=3,1,\"APN\",\"internet\"",
+            "description": "Set bearer APN",
+            "example": "AT+SAPBR=3,1,\"APN\",\"internet\""
+        },
+        {
+            "command": "AT+HTTPINIT",
+            "description": "Initialize HTTP service",
+            "example": "AT+HTTPINIT"
+        },
+        {
+            "command": "AT+HTTPTERM",
+            "description": "Terminate HTTP service",
+            "example": "AT+HTTPTERM"
+        },
+        {
+            "command": "AT+CGDCONT=1,\"IP\",\"internet\"",
+            "description": "Define PDP context",
+            "example": "AT+CGDCONT=1,\"IP\",\"internet\""
+        },
+        {
+            "command": "AT+CIICR",
+            "description": "Bring up wireless connection",
+            "example": "AT+CIICR"
         },
         {
             "command": "AT+CIFSR",
             "description": "Get local IP address",
             "example": "AT+CIFSR"
+        },
+        {
+            "command": "AT+CIPSTART=\"TCP\",\"example.com\",80",
+            "description": "Start TCP connection",
+            "example": "AT+CIPSTART=\"TCP\",\"example.com\",80"
+        },
+        {
+            "command": "AT+CIPSEND",
+            "description": "Send data through TCP connection",
+            "example": "AT+CIPSEND"
         }
     ],
     "MQTT": [
         {
-            "command": "AT+MQTTCONN",
-            "description": "Connect to MQTT broker",
-            "example": "AT+MQTTCONN=\"broker.hivemq.com\",1883"
+            "command": "AT+MQTTUSERCFG=0,1,\"client\",\"user\",\"pass\",0,0,\"\"",
+            "description": "Configure MQTT client",
+            "example": "AT+MQTTUSERCFG=0,1,\"client\",\"user\",\"pass\",0,0,\"\""
         },
         {
-            "command": "AT+MQTTSUB",
-            "description": "Subscribe to MQTT topic",
-            "example": "AT+MQTTSUB=\"topic/test\",0"
+            "command": "AT+MQTTCONN=0,\"broker.hivemq.com\",1883,0",
+            "description": "Connect to broker",
+            "example": "AT+MQTTCONN=0,\"broker.hivemq.com\",1883,0"
         },
         {
-            "command": "AT+MQTTPUB",
-            "description": "Publish message to topic",
-            "example": "AT+MQTTPUB=\"topic/test\",\"Hello\""
+            "command": "AT+MQTTPUB=0,\"topic\",\"message\",0,0",
+            "description": "Publish message",
+            "example": "AT+MQTTPUB=0,\"test/topic\",\"Hello\",0,0"
+        },
+        {
+            "command": "AT+MQTTSUB=0,\"topic\",1",
+            "description": "Subscribe to topic",
+            "example": "AT+MQTTSUB=0,\"test/topic\",1"
+        },
+        {
+            "command": "AT+MQTTDISCONN=0",
+            "description": "Disconnect MQTT",
+            "example": "AT+MQTTDISCONN=0"
+        },
+        {
+            "command": "AT+MQTTUNSUB=0,\"topic\"",
+            "description": "Unsubscribe from topic",
+            "example": "AT+MQTTUNSUB=0,\"test/topic\""
+        },
+        {
+            "command": "AT+MQTTSTATE=0",
+            "description": "Check MQTT state",
+            "example": "AT+MQTTSTATE=0"
         }
     ],
-    "Custom": [
+    "HTTP": [
         {
-            "command": "AT+LEDON",
-            "description": "Turn on LED",
-            "example": "AT+LEDON"
+            "command": "AT+HTTPINIT",
+            "description": "Initialize HTTP",
+            "example": "AT+HTTPINIT"
         },
         {
-            "command": "AT+LEDOFF",
-            "description": "Turn off LED",
-            "example": "AT+LEDOFF"
+            "command": "AT+HTTPPARA=\"CID\",1",
+            "description": "Set bearer profile identifier",
+            "example": "AT+HTTPPARA=\"CID\",1"
         },
         {
-            "command": "AT+SETNAME",
-            "description": "Set custom device name",
-            "example": "AT+SETNAME=MyDevice"
+            "command": "AT+HTTPPARA=\"URL\",\"http://example.com\"",
+            "description": "Set HTTP URL",
+            "example": "AT+HTTPPARA=\"URL\",\"http://example.com\""
+        },
+        {
+            "command": "AT+HTTPACTION=0",
+            "description": "HTTP GET action",
+            "example": "AT+HTTPACTION=0"
+        },
+        {
+            "command": "AT+HTTPREAD",
+            "description": "Read HTTP response",
+            "example": "AT+HTTPREAD"
+        },
+        {
+            "command": "AT+HTTPTERM",
+            "description": "Terminate HTTP",
+            "example": "AT+HTTPTERM"
+        },
+        {
+            "command": "AT+HTTPDATA=1024,5000",
+            "description": "Prepare to send HTTP POST data",
+            "example": "AT+HTTPDATA=1024,5000"
+        },
+        {
+            "command": "AT+HTTPACTION=1",
+            "description": "HTTP POST action",
+            "example": "AT+HTTPACTION=1"
+        }
+    ],
+    "Custom": [],
+    "SSL/TLS": [
+        {
+            "command": "AT+CIPSSLCCONF=1",
+            "description": "Enable SSL client mode",
+            "example": "AT+CIPSSLCCONF=1"
+        },
+        {
+            "command": "AT+CIPSSLCERT=\"cert.pem\"",
+            "description": "Upload SSL certificate",
+            "example": "AT+CIPSSLCERT=\"cert.pem\""
+        },
+        {
+            "command": "AT+CIPSSLKEY=\"key.pem\"",
+            "description": "Upload SSL private key",
+            "example": "AT+CIPSSLKEY=\"key.pem\""
+        }
+    ],
+    "OTA": [
+        {
+            "command": "AT+CIUPDATE",
+            "description": "Start firmware OTA update",
+            "example": "AT+CIUPDATE"
+        },
+        {
+            "command": "AT+SYSFLASH?",
+            "description": "Check flash partitions",
+            "example": "AT+SYSFLASH?"
         }
     ]
 }
