@@ -1,6 +1,20 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.5.1] - 2025-08-04
+### Added
+- Progressive Web App (PWA) support with `manifest.json`
+- High-resolution icons (192x192, 512x512) for mobile and desktop shortcuts
+- Apple Touch icon for iOS compatibility
+- Dynamic `<meta name="theme-color">` for mobile address bar styling
+
+### Improved
+- Updated `index.html` with meta tags for better social sharing and SEO
+- Optimized favicon structure for modern browsers
+
+
+---
+
 ## [1.5.0] - 2025-08-03
 ### Added
 - Full-screen AT Commands modal integrated into main app

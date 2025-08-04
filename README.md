@@ -29,18 +29,21 @@
 ✔ Connect / Disconnect with **dynamic baud rate**  
 ✔ **Hardware Reset** (RTS/DTR toggle)  
 ✔ Live Terminal:
-- Timestamp (12h/24h)
-- Normal / Hex / JSON display modes
-- Auto-scroll & Auto-clear  
+✔ Timestamp (12h/24h)
+✔ Normal / Hex / JSON display modes
+✔ Auto-scroll & Auto-clear  
 ✔ Export Options: TXT, JSON, CSV  
 ✔ **Custom Settings** (baud, data bits, parity, RTS/DTR)  
 ✔ **Emergency Auto-Clear** at 12,000 lines  
 ✔ **Dark & Light Themes**  
 ✔ **AT Commands Library (NEW in v1.5.0)**:
-- Full-screen modal with categorized tabs
-- Dynamic JSON-based data (150+ commands)
-- Search with highlight and quick clear
-- Responsive layout (tabs on desktop, dropdown on mobile)
+✔ Full-screen modal with categorized tabs
+✔ Dynamic JSON-based data (150+ commands)
+✔ Search with highlight and quick clear
+✔ Responsive layout (tabs on desktop, dropdown on mobile)
+✔ PWA support for mobile (Add to Home Screen)  
+✔ High-resolution icons for Android and iOS  
+✔ Dynamic theme-color for better mobile UX  
 
 ---
 
@@ -81,6 +84,7 @@ See full history in [CHANGELOG.md](./CHANGELOG.md)
 
 serial-terminal/
 ├── index.html
+├── site.webmanifest
 ├── assets/
 │ ├── css/
 │ │ ├── style.css
@@ -93,8 +97,12 @@ serial-terminal/
 │ │ ├── features.json
 │ │ ├── info.json
 │ │ └── version.json
-│ └── img/
-│ └── favicon.ico
+│ ├── img/
+│ │  ├── favicon.ico
+│ │  ├── /icons/
+│ │     ├── icon-192.png
+│ │     ├── icon-512.png
+│ │     ├── apple-touch-icon.png
 ├── CHANGELOG.md
 ├── README.md
 └── /screenshots/
