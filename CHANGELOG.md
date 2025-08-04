@@ -1,6 +1,15 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.5.2] - 2025-08-04
+### Improved
+- Replaced PWA icons with maskable versions for sharp and adaptive look on Android
+- Updated `site.webmanifest` with proper purpose flags (`any maskable`)
+- Verified Add to Home Screen UX for Chrome and iOS
+
+
+---
+
 ## [1.5.1] - 2025-08-04
 ### Added
 - Progressive Web App (PWA) support with `manifest.json`
