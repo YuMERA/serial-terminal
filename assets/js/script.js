@@ -776,6 +776,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 addSystemMessage(formattedSent, false, true);
 
                 sendInput.value = '';
+                clearInputButton.style.display = 'none';
+            
             } catch (err) {
                 addSystemMessage(`<system message> - Send error: ${err.message}`, true);
             }
