@@ -156,15 +156,6 @@ All notable changes to this project will be documented in this file.
 ---
 
 
-
-
-
-
-
-
-
-
-
 ## Previous Versions
 
 See full history in [Releases »](https://github.com/YuMERA/serial-terminal/releases)

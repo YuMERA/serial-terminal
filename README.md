@@ -82,30 +82,30 @@ See full history in [CHANGELOG.md](./CHANGELOG.md)
 
 ## 📂 Project Structure
 
-serial-terminal/
-├── index.html
-├── site.webmanifest
-├── assets/
-│ ├── css/
-│ │ ├── style.css
-│ │ └── menu.css
-│ ├── js/
-│ │ ├── script.js
-│ │ └── at-modal.js
-│ ├── json/
-│ │ ├── at_commands.json
-│ │ ├── features.json
-│ │ ├── info.json
-│ │ └── version.json
-│ ├── img/
-│ │  ├── favicon.ico
-│ │  ├── /icons/
-│ │     ├── icon-192.png
-│ │     ├── icon-512.png
-│ │     ├── apple-touch-icon.png
-├── CHANGELOG.md
-├── README.md
-└── /screenshots/
+- serial-terminal/
+- ├── index.html
+- ├── site.webmanifest
+- ├── assets/
+- │   ├── css/
+- │   │   ├── style.css
+- │   │   └── menu.css
+- │   ├── js/
+- │   │   ├── script.js
+- │   │   └── at-modal.js
+- │   ├── json/
+- │   │   ├── at_commands.json
+- │   │   ├── features.json
+- │   │   ├── info.json
+- │   │   └── version.json
+- │   └── img/
+- │       ├── favicon.ico
+- │       └── /icons/
+- │           ├── icon-192.png
+- │           ├── icon-512.png
+- │           └── apple-touch-icon.png
+- ├── CHANGELOG.md
+- ├── README.md
+- └── /screenshots/
 
 ---
 
