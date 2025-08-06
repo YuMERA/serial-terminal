@@ -1,5 +1,5 @@
 /*! 
-* Web Serial Terminal v1.5.2
+* Web Serial Terminal v1.5.3
 * (c) 2025 Mera System - All rights reserved
 * https://mera-system.com
 */
@@ -1380,6 +1380,26 @@ document.addEventListener('DOMContentLoaded', () => {
         renderAtCommands(data[category]);
     }
 
+    const donateLink = document.getElementById('donateLink');
+    const donateModal = document.getElementById('donateModal');
+    const closeDonateModal = document.getElementById('closeDonateModal');
+
+    if (donateLink && donateModal && closeDonateModal) {
+        donateLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            donateModal.style.display = 'flex';
+        });
+
+        closeDonateModal.addEventListener('click', () => {
+            donateModal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === donateModal) {
+                donateModal.style.display = 'none';
+            }
+        });
+    }
 
 
 });

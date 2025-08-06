@@ -1521,3 +1521,40 @@ body.theme-dark mark {
     }
 
 }
+
+/* Dugme za PayPal donaciju */
+#donateModal .modal-content{
+    height: 450px;
+}
+.donate-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #0070ba; /* PayPal plava */
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 6px;
+    padding: 10px 18px;
+    font-size: 1rem;
+    margin-top: 15px;
+    transition: background 0.3s ease;
+}
+
+.donate-button:hover {
+    background-color: #005ea6;
+}
+
+.paypal-icon {
+    height: 18px;
+    margin-right: 8px;
+}
+
+/* Dark tema */
+.dark-theme .donate-button {
+    background-color: #00457c;
+}
+
+.dark-theme .donate-button:hover {
+    background-color: #003366;
+}

@@ -59,6 +59,7 @@
                     <a href="#" id="aboutLink"><span class="icon">📘</span>About</a>
                     <a href="#" id="helpLink"><span class="icon">❓</span>Help</a>
                     <a href="#" id="contactLink"><span class="icon">✉️</span>Contact Us</a>
+                    <a href="#" id="donateLink"><span class="icon">☕</span>Donate</a>
                 </div>
                 
             </div>
@@ -409,24 +410,46 @@
     <!-- Modal za Export u .json ili .csv-->
     <div id="exportModal" class="modal">
         <div class="modal-content">
-        <span id="closeExportModal" class="close-button">&times;</span>
-        <h3>Export Terminal Output</h3>
+            <span id="closeExportModal" class="close-button">&times;</span>
+            <h3>Export Terminal Output</h3>
+            
+            <div id="settings-content">
+                <label for="exportFileName">File name:</label>
+                <input type="text" id="exportFileName" class="full-width" />
+            </div>
+            <div id="settings-content">
+                <label for="exportFormat">Format:</label>
+                <select id="exportFormat" class="full-width">
+                    <option value="csv">CSV (.csv)</option>
+                    <option value="json">JSON (.json)</option>
+                </select>
+            </div>
         
-        <div id="settings-content">
-            <label for="exportFileName">File name:</label>
-            <input type="text" id="exportFileName" class="full-width" />
+            <button id="confirmExportButton" class="bottom-export-button">Save</button>
         </div>
-        <div id="settings-content">
-            <label for="exportFormat">Format:</label>
-            <select id="exportFormat" class="full-width">
-                <option value="csv">CSV (.csv)</option>
-                <option value="json">JSON (.json)</option>
-            </select>
+    </div>   
+      
+    <!-- Modal DONATE -->
+    <div id="donateModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="closeDonateModal">&times;</span>
+            <h2>Support This Project ❤️</h2>
+            <p>
+                Donations help us keep this application running and support the development of new features and projects.  
+                Your contribution will go towards covering hosting costs and creating a dedicated website that showcases all our applications.
+            </p>
+            <p>
+                If you find this tool useful and want to support future improvements, click the button below to donate via PayPal.  
+                Every contribution, no matter the size, makes a big difference. Thank you for your support! ❤️
+            </p>
+            
+            <a href="https://paypal.me/yumera" target="_blank" class="donate-button">
+                <img src="https://www.paypalobjects.com/webstatic/mktg/logo/pp_cc_mark_111x69.jpg" alt="PayPal" class="paypal-icon">
+                Donate via PayPal
+            </a>
         </div>
-    
-        <button id="confirmExportButton" class="bottom-export-button">Save</button>
-        </div>
-      </div>      
+    </div>
+      
 
     <script src="assets/js/script.js" defer></script>
 </body>

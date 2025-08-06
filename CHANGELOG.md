@@ -1,12 +1,24 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.5.3] - 2025-08-07
+### Added
+- New **Donate** option in the app (accessible via Hamburger menu).
+- Dedicated modal for donations with PayPal integration.
+
+### Improved
+- Enhanced UX for donation modal (responsive + Dark/Light theme support).
+
+### Fixed
+- Minor UI tweaks for better alignment.
+
+---
+
 ## [1.5.2] - 2025-08-04
 ### Improved
 - Replaced PWA icons with maskable versions for sharp and adaptive look on Android
 - Updated `site.webmanifest` with proper purpose flags (`any maskable`)
 - Verified Add to Home Screen UX for Chrome and iOS
-
 
 ---
 
@@ -20,7 +32,6 @@ All notable changes to this project will be documented in this file.
 ### Improved
 - Updated `index.html` with meta tags for better social sharing and SEO
 - Optimized favicon structure for modern browsers
-
 
 ---
 

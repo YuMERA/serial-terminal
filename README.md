@@ -5,6 +5,7 @@
 [![Issues](https://img.shields.io/github/issues/YuMERA/serial-terminal?color=orange)](https://github.com/YuMERA/serial-terminal/issues)
 [![License](https://img.shields.io/badge/license-Private-red)]()
 [![Vercel Deploy](https://img.shields.io/badge/deployed%20on-Vercel-blue)](https://serial-terminal-cyan.vercel.app/)
+[![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://paypal.me/yumera)  
 
 ---
 
@@ -111,6 +112,17 @@ See full history in [CHANGELOG.md](./CHANGELOG.md)
 
 ## 🔒 License
 © 2025 me[R]a — All rights reserved.
+
+---
+
+## ☕ Support This Project  
+
+If you find this tool useful and want to help maintain it and support future development, consider making a donation.  
+Your contribution helps cover hosting costs and ensures continuous improvement of the app.  
+
+[![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://paypal.me/yumera)  
+
+Every contribution, no matter the size, makes a big difference. ❤️  
 
 ---
 
