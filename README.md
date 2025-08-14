@@ -54,7 +54,7 @@
 ![Main Dark Mode](./screenshots/dark-mode.png)
 
 ### AT Commands Modal
-[AT Commands Light Mode](./screenshots/at-light.png)
+[AT Commands Light Mode](./screenshots/at-light.png)  
 [AT Commands Dark Mode](./screenshots/at-dark.png)
 
 ---
